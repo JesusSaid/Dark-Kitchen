@@ -11,17 +11,17 @@ export default defineType({
             title: 'Titulo'
         },
         {
-            name: 'image',
+            name: 'imagen',
             type: 'image',
             title: 'Imagen'
         },
         {
-            name: 'description',
+            name: 'descripcion',
             type: 'string',
-            title: 'Description'
+            title: 'Descripcion'
         },
         {
-            name: 'price',
+            name: 'precio',
             type: 'number',
             title: 'Precio'
         }

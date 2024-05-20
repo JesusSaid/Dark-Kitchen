@@ -11,7 +11,7 @@ export default defineType({
             title: 'Titulo'
         },
         {
-            name: 'image',
+            name: 'imagen',
             type: 'image',
             title: 'Imagen'
         }

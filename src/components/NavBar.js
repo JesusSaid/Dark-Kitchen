@@ -1,25 +1,45 @@
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, Link, useLocation  } from "react-router-dom";
 
 export default function NacBar() {
+    const [activeStyle, setActiveStyle] = useState({}); // Estado para el estilo activo
+    const location = useLocation(); // Hook para obtener la ubicación actual
+
+    // Efecto para actualizar el estilo activo cuando cambia la ubicación
+    useEffect(() => {
+        if (location.pathname === "/") {
+            setActiveStyle({ borderBottom: "0.2rem solid white" });
+        } else if (location.pathname === "/catalogue") {
+            setActiveStyle({ borderBottom: "0.2rem solid white" });
+        } else if (location.pathname === "/shoppingcart") {
+            setActiveStyle({ borderBottom: "0.2rem solid white" });
+        } else if (location.pathname === "/yo") {
+            setActiveStyle({ borderBottom: "0.2rem solid white" });
+        } else {
+            setActiveStyle({});
+        }
+    }, [location]);
     return (
         <header className="bg-orange-600 w-full">
             <nav className="flex items-center w-full">
                 <Link to="/"><img src="./descarga.jpg" alt="Logo" className="h-16 w-16 mr-3 my-6 ml-3" /></Link>
                 <div className="ml-auto flex items-center">
                     <NavLink 
+                        style={location.pathname === "/" ? activeStyle : {}}
                         to="/" 
                         activeClassName="text-orange-200 bg-orange-800"
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800">
                         Inicio
                     </NavLink>
                     <NavLink 
+                        style={location.pathname === "/catalogue" ? activeStyle : {}}
                         to="/catalogue" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800">
                         Catálogo
                     </NavLink>
                     <NavLink 
+                        style={location.pathname === "/shoppingcart" ? activeStyle : {}}
                         to="/shoppingcart" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800">
@@ -28,6 +48,7 @@ export default function NacBar() {
                         </svg>
                     </NavLink>
                     <NavLink 
+                        style={location.pathname === "/yo" ? activeStyle : {}}
                         to="/yo" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800" >

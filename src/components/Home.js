@@ -23,7 +23,7 @@ export default function Home(){
     }, []);
 
     return (
-        <main className="bg-green-100 min-h-screen p-12">
+        <main className="min-h-screen p-12">
             <section className="container mx-auto">
                 <h1 className="text-5xl flex justify-center cursive">EL MAMÓN</h1>
                 <h2 className="text-lg text-gray-600 flex justify-center mb-12">Repostería Oaxaqueña</h2>

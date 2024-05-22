@@ -3,7 +3,13 @@ import category from './category'
 import post from './post'
 import author from './author'
 import product from './product'
-import user from './user'
+import usuario from './usuario'
 import event from './event'
+import pastel_personalizado from './pastel_personalizado'
+import pastel from './pastel'
+import producto from './producto'
+import direccion from './direccion'
+import tarjeta from './tarjeta'
+import tipo_poducto from './tipo_poducto'
 
-export const schemaTypes = [user, product, event]
+export const schemaTypes = [usuario, product, event, pastel_personalizado, pastel, producto, direccion, tarjeta, tipo_poducto]

@@ -7,7 +7,7 @@ export default function Catalogue(){
 
     useEffect(() => {
         SanityClient
-            .fetch(`*[_type == "producto"]{
+            .fetch(`*[_type == "product"]{
                 titulo,
                 imagen{
                     asset->{

@@ -26,6 +26,7 @@ export default function NacBar() {
                 <div className="ml-auto flex items-center">
                     <NavLink 
                         style={location.pathname === "/" ? activeStyle : {}}
+                        aria-label="Inicio"
                         to="/" 
                         activeClassName="text-orange-200 bg-orange-800"
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800">
@@ -33,6 +34,7 @@ export default function NacBar() {
                     </NavLink>
                     <NavLink 
                         style={location.pathname === "/catalogue" ? activeStyle : {}}
+                        aria-label="Catálogo"
                         to="/catalogue" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800">
@@ -40,6 +42,7 @@ export default function NacBar() {
                     </NavLink>
                     <NavLink 
                         style={location.pathname === "/shoppingcart" ? activeStyle : {}}
+                        aria-label="Carrito"
                         to="/shoppingcart" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800">
@@ -49,6 +52,7 @@ export default function NacBar() {
                     </NavLink>
                     <NavLink 
                         style={location.pathname === "/yo" ? activeStyle : {}}
+                        aria-label="Perfil"
                         to="/yo" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800" >

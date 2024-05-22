@@ -15,4 +15,12 @@
 .home-name{
     font-size: 150px;
 }
-  
+
+::-webkit-scrollbar{
+  width: 0.25rem;
+}
+
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(transparent, #ff9900);
+  border-radius: 0.5rem;
+}

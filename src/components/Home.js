@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
 import SanityClient from "../client.js";
 
 export default function Home(){

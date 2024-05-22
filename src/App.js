@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
     <NavBar />
       <Routes>
-        <Route Component={Home} path='/' exact />
+        <Route Component={Home} path='/'/>
         <Route Component={ShoppingCart} path='/shoppingcart' />
         <Route Component={Catalogue} path='/catalogue' />
       </Routes>

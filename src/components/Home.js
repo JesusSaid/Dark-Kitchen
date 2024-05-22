@@ -27,7 +27,7 @@ export default function Home(){
             <section className="container mx-auto">
                 <h1 className="text-5xl flex justify-center cursive">EL MAMÓN</h1>
                 <h2 className="text-lg text-gray-600 flex justify-center mb-12">Repostería Oaxaqueña</h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-10">
+                <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                     {homeData && homeData.map((home, index) => (
                     <article>
                             <span 
@@ -35,9 +35,10 @@ export default function Home(){
                                 key={index}
                             >
                                 <img
+                                    style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}
                                     src={home.imagen.asset.url}
                                     alt={home.imagen.alt || home.titulo}
-                                    className="w-full h-90 rounded-r object-cover absolute"
+                                    className="w-auto h-full rounded-r"
                                 />
                             </span>
                     </article>

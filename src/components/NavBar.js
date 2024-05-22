@@ -22,7 +22,7 @@ export default function NacBar() {
     return (
         <header className="bg-orange-600 w-full">
             <nav className="flex items-center w-full">
-                <Link to="/"><img src="./descarga.jpg" alt="Logo" className="h-16 w-16 mr-3 my-6 ml-3" /></Link>
+                <Link to="/"><img src="./descarga.jpg" alt="Logo" className="h-16 w-auto mr-3 my-6 ml-3" /></Link>
                 <div className="ml-auto flex items-center">
                     <NavLink 
                         style={location.pathname === "/" ? activeStyle : {}}

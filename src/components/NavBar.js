@@ -1,11 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function NacBar() {
     return (
         <header className="bg-orange-600 w-full">
             <nav className="flex items-center w-full">
-                <img src="./descarga.jpg" alt="Logo" className="h-16 w-16 mr-3 my-6 ml-3" />
+                <Link to="/"><img src="./descarga.jpg" alt="Logo" className="h-16 w-16 mr-3 my-6 ml-3" /></Link>
                 <div className="ml-auto flex items-center">
                     <NavLink 
                         to="/" 

@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import ShoppingCart from "./components/ShoppingCart";
 import NavBar from "./components/NavBar"
 import Catalogue from "./components/Catalogue";
+import Perfil from "./components/Perfil";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route Component={Home} path='/'/>
         <Route Component={ShoppingCart} path='/shoppingcart' />
         <Route Component={Catalogue} path='/catalogue' />
+        <Route Component={Perfil} path='/yo' />
       </Routes>
     </BrowserRouter>
   )

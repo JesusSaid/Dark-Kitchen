@@ -17,7 +17,7 @@ export default function NacBar() {
                         to="/catalogue" 
                         className="inline-flex items-center py-3 px-3 my-6 rounded text-orange-200 hover:text-green-800"
                         activeClassName="text-orange-200 bg-orange-800">
-                        Catalogo
+                        Catálogo
                     </NavLink>
                     <NavLink 
                         to="/shoppingcart" 

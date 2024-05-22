@@ -27,7 +27,7 @@ export default function Catalogue(){
         <main className="bg-green-100 min-h-screen p-12">
             <section className="container mx-auto">
                 <h1 className="text-5xl flex justify-center cursive">
-                    CATALOGO
+                    CATÁLOGO
                 </h1>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {catalogueData && catalogueData.map((catalogue, index) => (

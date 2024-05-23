@@ -13,7 +13,7 @@
 }
   
 .home-name{
-    font-size: 150px;
+  font-size: 150px;
 }
 
 ::-webkit-scrollbar{
@@ -32,4 +32,8 @@
 
 body{
   background-color: rgb(220 252 231);
+}
+
+nav{
+  background-color: rgb(234, 128, 72);
 }

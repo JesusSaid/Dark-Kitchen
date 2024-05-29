@@ -9,6 +9,8 @@ export default function NacBar() {
     useEffect(() => {
         if (location.pathname === "/") {
             setActiveStyle({ borderBottom: "0.2rem solid white" });
+        } else if (location.pathname === "/personalizar_pastel") {
+            setActiveStyle({ borderBottom: "0.2rem solid white" });
         } else if (location.pathname === "/catalogue") {
             setActiveStyle({ borderBottom: "0.2rem solid white" });
         } else if (location.pathname === "/shoppingcart") {
@@ -30,6 +32,14 @@ export default function NacBar() {
                         activeClassName=""
                         className="inline-flex items-center py-3 px-3 my-6 rounded hover:text-green-800">
                         Inicio
+                    </NavLink>
+                    <NavLink 
+                        style={location.pathname === "/personalizar_pastel" ? activeStyle : {}}
+                        aria-label="Personalizar pastel"
+                        to="/personalizar_pastel" 
+                        className="inline-flex items-center py-3 px-3 my-6 rounded hover:text-green-800"
+                        activeClassName="">
+                        Personalizar pasel
                     </NavLink>
                     <NavLink 
                         style={location.pathname === "/catalogue" ? activeStyle : {}}

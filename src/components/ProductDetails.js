@@ -6,6 +6,7 @@ import Style from "../styles/catologo.module.css";
 export default function ProductDetails() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
+    console.log(product);
 
     useEffect(() => {
         SanityClient

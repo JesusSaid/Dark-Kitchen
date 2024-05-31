@@ -28,13 +28,14 @@ export default function Catalogue() {
 
     return (
         <main className="min-h-screen p-12">
+            <div className={Style.gridContainer} >
             {catalogueData && catalogueData.map((catalogue) => (
                 <div className={Style.card} key={catalogue._id}>
                     <Link to={`/product/${catalogue._id}`}>
                         <div className={Style.cardimg}>
                             <img
                                 src={catalogue.imagen.asset.url}
-                                alt={catalogue.imagen.alt || catalogue.titulo}
+                                alt={catalogue.imagen.alt || catalogue.titulo} style={{objectFit:'cover'}} width="160" height="160"
                             />
                         </div>
                     </Link>
@@ -54,6 +55,7 @@ export default function Catalogue() {
                     </div>
                 </div>
             ))}
+            </div>
         </main>
     );
 }

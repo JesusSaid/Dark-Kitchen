@@ -31,9 +31,12 @@
 }
 
 body{
-  background-color: rgb(220 252 231);
+  background-color: #FBFCFC;
+  width: 100vw;
+  height: 100vh;
 }
 
 nav{
-  background-color: rgb(234, 128, 72);
+  background-color: #E67E22;
+  
 }

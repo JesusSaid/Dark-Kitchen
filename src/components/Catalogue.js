@@ -6,7 +6,9 @@ import Style from "../styles/catologo.module.css";
 
 export default function Catalogue() {
     const [catalogueData, setCatalogueData] = useState(null);
-
+    const [searchText, setSearchText] = useState('');
+    const [placeholderIndex, setPlaceholderIndex] = useState(0);
+    
     useEffect(() => {
         SanityClient
             .fetch(`*[_type == "product"]{
@@ -26,10 +28,31 @@ export default function Catalogue() {
             .catch(err => console.error(err));
     }, []);
 
+    const placeholders = ['Buscar', 'Panquesitos', 'Pasteles'];
+    const filteredPosts = catalogueData && catalogueData.filter(post =>
+        post.titulo.toLowerCase().includes(searchText.toLowerCase()) || 
+        (typeof post.body === 'object' && JSON.stringify(post.body).toLowerCase().includes(searchText.toLowerCase()))
+    );            
+
+    const handleSearchChange = (event) => {
+        const text = event.target.value;
+        setSearchText(text);
+    };
     return (
-        <main className="min-h-screen p-12">
+        <main className={Style.mainContainer}>
+            <div className={Style.inputWrapper}>
+                <input
+                    type="text"
+                    name="text"
+                    className={Style.inputBuscar}
+                    placeholder={placeholders[placeholderIndex]}
+                    value={searchText}
+                    onChange={handleSearchChange}
+                />
+            </div>
+            <hr/>
             <div className={Style.gridContainer} >
-            {catalogueData && catalogueData.map((catalogue) => (
+            {filteredPosts && filteredPosts.map((catalogue) => (
                 <div className={Style.card} key={catalogue._id}>
                     <Link to={`/product/${catalogue._id}`}>
                         <div className={Style.cardimg}>

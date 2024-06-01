@@ -1,3 +1,7 @@
+.mainContainer
+{
+    margin-top: 10rem;
+}
 .gridContainer
 {
     display: grid;
@@ -127,4 +131,42 @@ svg {
     .gridContainer {
         grid-template-columns: repeat(1, 1fr);
     }
+}
+
+
+.inputWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    position: relative;
+    margin-right: 6rem;
+    margin-top:  5rem;
+    margin-bottom: 2rem;
+}
+
+.inputBuscar {
+    border-style: none;
+    padding: 10px;
+    outline: none;
+    text-align: center;
+}
+
+.inputBuscar::placeholder,
+.inputBuscar {
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
+    font-size: 17px;
+}
+
+.inputBuscar::placeholder {
+    color: #3e3e3e;
+}
+
+.inputBuscar, .inputBuscar:focus {
+    box-shadow: none;
+    width: 12rem;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 3px solid #FF5733;
+    transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 }

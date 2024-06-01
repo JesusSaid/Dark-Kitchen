@@ -34,7 +34,8 @@ export default function NavBar() {
     };
 
     return (
-        <header className={Style.cabecera}>
+        <>
+            <div className={Style.papelPicadoContainer}></div>
             <nav className={Style.navbarNav}>
                 <NavLink to='/' className={Style.navbarNavLink}>
                     <Link to="/"><img src="./descarga.jpg" alt="Logo" className={Style.logoImg} onClick={closeMenu}/></Link>
@@ -76,6 +77,6 @@ export default function NavBar() {
                     </NavLink>
                 </div>
             </nav>
-        </header>
+        </>
     );
 }

@@ -40,6 +40,9 @@ export default function Catalogue() {
     };
     return (
         <main className={Style.mainContainer}>
+            <div className={Style.contenedorTituloElMamon}>
+                <h1 className={Style.tituloPasteles}>Nuestros pasteles</h1>
+            </div>
             <div className={Style.inputWrapper}>
                 <input
                     type="text"

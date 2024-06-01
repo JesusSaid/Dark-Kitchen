@@ -37,6 +37,9 @@ export default function NacBar() {
                     <NavLink to='/catalogue' activeclassname="activo" className={Style.navbarNavLink}  style={location.pathname === "/catalogue" ? activeStyle : {}}>
                         Catalogo
                     </NavLink>
+                    <NavLink to='/enventos' activeclassname="activo" className={Style.navbarNavLink}  style={location.pathname === "/eventos" ? activeStyle : {}}>
+                        Eventos
+                    </NavLink>
                     <NavLink 
                             style={location.pathname === "/shoppingcart" ? activeStyle : {}}
                             aria-label="Carrito"

@@ -7,7 +7,7 @@ import Catalogue from "./components/Catalogue";
 import Perfil from "./components/Perfil";
 import PersonalizarPastel from "./components/PersonalizarPastel";
 import ProductDetails from "./components/ProductDetails";
-
+import Eventos from "./components/eventos";
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +19,7 @@ function App() {
         <Route path="/personalizar_pastel" element={<PersonalizarPastel />} />
         <Route path="/yo" element={<Perfil />} />
         <Route path="/product/:productId" element={<ProductDetails />} />
+        <Route path="/eventos" element={<Eventos/>}></Route>
       </Routes>
     </BrowserRouter>
   );

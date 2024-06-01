@@ -1,6 +1,15 @@
 .mainContainer
 {
-    margin-top: 10rem;
+    margin-top: 4rem;
+}
+.ContenedorTituloElMamon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+}
+
+.tituloPasteles {
+    margin: 0;
 }
 .gridContainer
 {
@@ -124,6 +133,7 @@ svg {
 @media (max-width: 1024px) {
     .gridContainer {
         grid-template-columns: repeat(3, 1fr);
+        margin-left: 4rem;
     }
 }
 

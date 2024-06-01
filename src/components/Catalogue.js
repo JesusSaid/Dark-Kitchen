@@ -54,7 +54,7 @@ export default function Catalogue() {
             <div className={Style.gridContainer} >
             {filteredPosts && filteredPosts.map((catalogue) => (
                 <div className={Style.card} key={catalogue._id}>
-                    <Link to={`/product/${catalogue._id}`}>
+                    <Link to={`/producto/${catalogue._id}`}>
                         <div className={Style.cardimg}>
                             <img
                                 src={catalogue.imagen.asset.url}

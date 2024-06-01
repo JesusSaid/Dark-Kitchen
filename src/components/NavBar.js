@@ -16,6 +16,8 @@ export default function NavBar() {
             setActiveStyle({ borderBottom: "0.2rem solid white" });
         } else if (location.pathname === "/catalogo") {
             setActiveStyle({ borderBottom: "0.2rem solid white" });
+        } else if (location.pathname === "/eventos") {
+            setActiveStyle({ borderBottom: "0.2rem solid white" });
         } else if (location.pathname === "/carrito") {
             setActiveStyle({ borderBottom: "0.2rem solid white" });
         } else if (location.pathname === "/yo") {
@@ -53,7 +55,7 @@ export default function NavBar() {
                     <NavLink to='/catalogo' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/catalogo" ? activeStyle : {}} onClick={closeMenu}>
                         Catalogo
                     </NavLink>
-                    <NavLink to='/enventos' activeclassname="activo" className={Style.navbarNavLink}  style={location.pathname === "/eventos" ? activeStyle : {}}>
+                    <NavLink to='/eventos' activeclassname="activo" className={Style.navbarNavLink}  style={location.pathname === "/eventos" ? activeStyle : {}} onClick={closeMenu}>
                         Eventos
                     </NavLink>
                     <NavLink 

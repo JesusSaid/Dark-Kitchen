@@ -18,7 +18,7 @@ function App() {
         <Route path="/catalogo" element={<Catalogue />} />
         <Route path="/personalizar_pastel" element={<PersonalizarPastel />} />
         <Route path="/yo" element={<Perfil />} />
-        <Route path="/product/:productId" element={<ProductDetails />} />
+        <Route path="/producto/:productId" element={<ProductDetails />} />
         <Route path="/eventos" element={<Eventos/>}></Route>
       </Routes>
     </BrowserRouter>

@@ -39,10 +39,7 @@ export default function Catalogue() {
         setSearchText(text);
     };
     return (
-        <main className={Style.mainContainer}>
-            <div className={Style.contenedorTituloElMamon}>
-                <h1 className={Style.tituloPasteles}>Nuestros pasteles</h1>
-            </div>
+        <main>
             <div className={Style.inputWrapper}>
                 <input
                     type="text"
@@ -57,7 +54,7 @@ export default function Catalogue() {
             <div className={Style.gridContainer} >
             {filteredPosts && filteredPosts.map((catalogue) => (
                 <div className={Style.card} key={catalogue._id}>
-                    <Link to={`/product/${catalogue._id}`}>
+                    <Link to={`/producto/${catalogue._id}`}>
                         <div className={Style.cardimg}>
                             <img
                                 src={catalogue.imagen.asset.url}
@@ -65,10 +62,12 @@ export default function Catalogue() {
                             />
                         </div>
                     </Link>
-                    <div className={Style.cardinfo}>
-                        <p className={Style.texttitle}>{catalogue.titulo}</p>
-                        <p className="text-body">{catalogue.descripcion}</p>
-                    </div>
+                    <Link to={`/producto/${catalogue._id}`}>
+                        <div className={Style.cardinfo}>
+                            <p className={Style.texttitle}>{catalogue.titulo}</p>
+                            <p className="text-body">{catalogue.descripcion}</p>
+                        </div>
+                    </Link>
                     <div className={Style.cardfooter}>
                         <span className={Style.texttitle}>${catalogue.precio}</span>
                         <div className={Style.cardbutton}>

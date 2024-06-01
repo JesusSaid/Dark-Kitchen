@@ -14,8 +14,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/shoppingcart" element={<ShoppingCart />} />
-        <Route path="/catalogue" element={<Catalogue />} />
+        <Route path="/carrito" element={<ShoppingCart />} />
+        <Route path="/catalogo" element={<Catalogue />} />
         <Route path="/personalizar_pastel" element={<PersonalizarPastel />} />
         <Route path="/yo" element={<Perfil />} />
         <Route path="/product/:productId" element={<ProductDetails />} />

@@ -34,9 +34,10 @@ body{
   background-color: #FBFCFC;
   width: 100vw;
   height: 100vh;
+  margin-top: 4rem;
+  overflow-x: hidden;
 }
 
 nav{
   background-color: #E67E22;
-  
 }

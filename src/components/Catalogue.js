@@ -39,7 +39,7 @@ export default function Catalogue() {
         setSearchText(text);
     };
     return (
-        <main className={Style.mainContainer}>
+        <main>
             <div className={Style.inputWrapper}>
                 <input
                     type="text"
@@ -62,10 +62,12 @@ export default function Catalogue() {
                             />
                         </div>
                     </Link>
-                    <div className={Style.cardinfo}>
-                        <p className={Style.texttitle}>{catalogue.titulo}</p>
-                        <p className="text-body">{catalogue.descripcion}</p>
-                    </div>
+                    <Link to={`/producto/${catalogue._id}`}>
+                        <div className={Style.cardinfo}>
+                            <p className={Style.texttitle}>{catalogue.titulo}</p>
+                            <p className="text-body">{catalogue.descripcion}</p>
+                        </div>
+                    </Link>
                     <div className={Style.cardfooter}>
                         <span className={Style.texttitle}>${catalogue.precio}</span>
                         <div className={Style.cardbutton}>

@@ -43,11 +43,6 @@
     padding-top: 10%;
 }
 
-svg {
-    width: 20px;
-    height: 20px;
-}
-
 .cardfooter {
     width: 100%;
     display: flex;
@@ -163,6 +158,7 @@ svg {
         grid-template-columns: repeat(1, 1fr);
     }
 }
+
 
 .inputWrapper {
     display: flex;

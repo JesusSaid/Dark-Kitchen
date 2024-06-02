@@ -57,7 +57,7 @@ export default function Home(){
                     <div className={Style.quoteItem}>
                         <img alt="User 2" src="https://media.gq.com.mx/photos/640f3efd5b759e424e0f463d/master/w_2560%2Cc_limit/premios%2520oscar%25202023%2520broches%2520hombre.jpg" className={Style.userImage}/>
                         <blockquote className={Style.quote}>
-                            Estos pasteles son mis favoritos! Los amo con cada bocado.. Gracias por crear algo tan único.
+                            Estos pasteles son mis favoritos! Los amo con cada bocado... Gracias por crear algo tan único.
                         </blockquote>
                         <p className={Style.userName}>- Michael B. Jordan</p>
                     </div>

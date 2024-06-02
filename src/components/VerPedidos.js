@@ -13,7 +13,7 @@ export default function VerPedidos(){
                         <th>Dirección de contacto</th>
                         <th>Tamaño de pastel</th>
                         <th>Solicitudes especiales</th>
-                        <th>Fechay hora de entrega</th>
+                        <th>Fecha y hora de entrega</th>
                         <th>Recepcionista</th>
                         <th>Observación</th>
                         <th>Precio</th>

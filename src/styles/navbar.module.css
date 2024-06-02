@@ -1,10 +1,10 @@
 .papelPicadoContainer{
     position: absolute;
     top: 2.5%;
-    left: 38%;
-    transform: translate(-40%,-50%);
+    left: 32.5%;
+    transform: translate(-50%,-50%);
     background-image: url(../../public/papel_picado.png);
-    width: 69vw;
+    width: 40vw;
     height: 4rem;
     background-size: contain;
     background-repeat: repeat-x; 

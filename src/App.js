@@ -8,6 +8,8 @@ import Perfil from "./components/Perfil";
 import PersonalizarPastel from "./components/PersonalizarPastel";
 import ProductDetails from "./components/ProductDetails";
 import Eventos from "./components/eventos";
+import VerPedidos from "./components/VerPedidos";
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +22,7 @@ function App() {
         <Route path="/yo" element={<Perfil />} />
         <Route path="/producto/:productId" element={<ProductDetails />} />
         <Route path="/eventos" element={<Eventos/>}></Route>
+        <Route path="/verPedidos" element={<VerPedidos />} />
       </Routes>
     </BrowserRouter>
   );

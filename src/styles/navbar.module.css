@@ -82,6 +82,7 @@
         display: block;
         font-size: 2rem;
         color: #fff;
+        margin-right: 1rem;
     }
     .showMenu {
         display: flex;

@@ -3,7 +3,7 @@ import React from 'react'
 const Eventos = () => {
     return (
         <div>
-            <h1>Perfil</h1>
+            <h1>eventos</h1>
         </div>
     )
 }

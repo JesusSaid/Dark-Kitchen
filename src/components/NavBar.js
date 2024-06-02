@@ -11,17 +11,17 @@ export default function NavBar() {
 
     useEffect(() => {
         if (location.pathname === "/") {
-            setActiveStyle({ borderBottom: "0.2rem solid white", paddingBottom: "0.25rem"});
+            setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem"});
         } else if (location.pathname === "/personalizar_pastel") {
-            setActiveStyle({ borderBottom: "0.2rem solid white", paddingBottom: "0.25rem" });
+            setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
         } else if (location.pathname === "/catalogo") {
-            setActiveStyle({ borderBottom: "0.2rem solid white", paddingBottom: "0.25rem" });
+            setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
         } else if (location.pathname === "/eventos") {
-            setActiveStyle({ borderBottom: "0.2rem solid white", paddingBottom: "0.25rem" });
+            setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
         } else if (location.pathname === "/carrito") {
-            setActiveStyle({ borderBottom: "0.2rem solid white", paddingBottom: "0.25rem" });
+            setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
         } else if (location.pathname === "/yo") {
-            setActiveStyle({ borderBottom: "0.2rem solid white", paddingBottom: "0.25rem" });
+            setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
         } else {
             setActiveStyle({});
         }

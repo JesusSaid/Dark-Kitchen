@@ -13,8 +13,7 @@ export default function VerPedidos(){
                         <th>Dirección de contacto</th>
                         <th>Tamaño de pastel</th>
                         <th>Solicitudes especiales</th>
-                        <th>Fecha de entrega</th>
-                        <th>Hora de entrega</th>
+                        <th>Fechay hora de entrega</th>
                         <th>Recepcionista</th>
                         <th>Observación</th>
                         <th>Precio</th>
@@ -29,8 +28,7 @@ export default function VerPedidos(){
                         <td>Salón de fiesta 1</td>
                         <td>Pequeño</td>
                         <td>Imagen de tal personaje</td>
-                        <td>04/06/2024</td>
-                        <td>17:00</td>
+                        <td>04/06/2024 17:00</td>
                         <td>Juan Carlos García</td>
                         <td>Ninguna</td>
                         <td>$$$$</td>
@@ -44,8 +42,7 @@ export default function VerPedidos(){
                         <td>Salón de fiesta 1</td>
                         <td>Pequeño</td>
                         <td>Imagen de tal personaje</td>
-                        <td>04/06/2024</td>
-                        <td>17:00</td>
+                        <td>04/06/2024 17:00</td>
                         <td>Juan Carlos García</td>
                         <td>Ninguna</td>
                         <td>$$$$</td>
@@ -58,8 +55,7 @@ export default function VerPedidos(){
                         <td>Salón de fiesta 1</td>
                         <td>Pequeño</td>
                         <td>Imagen de tal personaje</td>
-                        <td>04/06/2024</td>
-                        <td>17:00</td>
+                        <td>04/06/2024 17:00</td>
                         <td>Juan Carlos García</td>
                         <td>Ninguna</td>
                         <td>$$$$</td>
@@ -72,8 +68,7 @@ export default function VerPedidos(){
                         <td>Salón de fiesta 1</td>
                         <td>Pequeño</td>
                         <td>Imagen de tal personaje</td>
-                        <td>04/06/2024</td>
-                        <td>17:00</td>
+                        <td>04/06/2024 17:00</td>
                         <td>Juan Carlos García</td>
                         <td>Ninguna</td>
                         <td>$$$$</td>

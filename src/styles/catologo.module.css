@@ -43,11 +43,6 @@
     padding-top: 10%;
 }
 
-svg {
-    width: 20px;
-    height: 20px;
-}
-
 .cardfooter {
     width: 100%;
     display: flex;
@@ -122,19 +117,6 @@ svg {
     font-size: 1.5rem;
     font-weight: bold;
     color: #E74C3C;
-}
-
-/*Zone de media querys*/
-@media (max-width: 1024px) {
-    .gridContainer {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 767px) {
-    .gridContainer {
-        grid-template-columns: repeat(1, 1fr);
-    }
 }
 
 .inputWrapper {

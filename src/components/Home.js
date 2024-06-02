@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import SanityClient from "../client.js";
+import Style from "../styles/home.module.css";
 
 export default function Home(){
     const [homeData, setHomeData] = useState(null);
@@ -32,8 +33,7 @@ export default function Home(){
                     <article>
                             <span 
                                 className="block h-64 relative rounded shadow leading-snug bg-white border-l-8"
-                                key={index}
-                            >
+                                key={index}>
                                 <img
                                     style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}
                                     src={home.imagen.asset.url}
@@ -43,6 +43,24 @@ export default function Home(){
                             </span>
                     </article>
                     ))}
+                </div>
+            </section>
+            <section>
+                <div className={Style.quotesContainer}>
+                    <div className={Style.quoteItem}>
+                        <img alt="User 1" src="https://pymstatic.com/5844/conversions/personas-emocionales-wide_webp.webp" className={Style.userImage}/>
+                        <blockquote className={Style.quote}>
+                            Me encantan los pasteles de "El mamón" porque son únicos, originales y a muy buen precio!
+                        </blockquote>
+                        <p className={Style.userName}>- Miranda Hernández</p>
+                    </div>
+                    <div className={Style.quoteItem}>
+                        <img alt="User 2" src="https://media.gq.com.mx/photos/640f3efd5b759e424e0f463d/master/w_2560%2Cc_limit/premios%2520oscar%25202023%2520broches%2520hombre.jpg" className={Style.userImage}/>
+                        <blockquote className={Style.quote}>
+                            Estos pasteles son mis favoritos! Los amo con cada bocado.. Gracias por crear algo tan único.
+                        </blockquote>
+                        <p className={Style.userName}>- Michael B. Jordan</p>
+                    </div>
                 </div>
             </section>
         </main>

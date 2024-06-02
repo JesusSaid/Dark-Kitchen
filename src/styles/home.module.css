@@ -1,0 +1,30 @@
+.quotesContainer{
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.quoteItem{
+    display: grid;
+    place-items: center;
+    text-align: center;
+}
+
+.userImage{
+    border-radius: 50%;
+    width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.quote{
+    font-style: italic;
+    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.userName{
+    color: grey;
+}

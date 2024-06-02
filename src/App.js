@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import ShoppingCart from "./components/ShoppingCart";
@@ -8,6 +7,8 @@ import Perfil from "./components/Perfil";
 import PersonalizarPastel from "./components/PersonalizarPastel";
 import ProductDetails from "./components/ProductDetails";
 import Eventos from "./components/eventos";
+import VerPedidos from "./components/VerPedidos";
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,8 @@ function App() {
         <Route path="/yo" element={<Perfil />} />
         <Route path="/producto/:productId" element={<ProductDetails />} />
         <Route path="/eventos" element={<Eventos/>}></Route>
+        <Route path="/verpedidos" element={<VerPedidos />} />
+
       </Routes>
     </BrowserRouter>
   );

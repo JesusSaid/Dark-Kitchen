@@ -1,5 +1,11 @@
+.VerPedidos {
+    display: grid;
+    place-items: center;
+    width: 100vw;
+    overflow-x: auto;
+}
 table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     background-color: #fff;

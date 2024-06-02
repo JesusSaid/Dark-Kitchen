@@ -22,7 +22,7 @@ export default function NavBar() {
             setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
         } else if (location.pathname === "/yo") {
             setActiveStyle({ borderBottom: "0.2rem solid aliceblue", paddingBottom: "0.25rem" });
-        }else if (location.pathname === "/verpedidos") {
+        }else if (location.pathname === "/verPedidos") {
             setActiveStyle({ borderBottom: "0.2rem solid white" });
         } else {
             setActiveStyle({});
@@ -51,7 +51,7 @@ export default function NavBar() {
                     <NavLink to='/' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/" ? activeStyle : {}} onClick={closeMenu}>
                         <FontAwesomeIcon icon={faHome} />
                     </NavLink>
-                    <NavLink to='/verpedidos' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/personalizar_pastel" ? activeStyle : {}} onClick={closeMenu}>
+                    <NavLink to='/verPedidos' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/verPedidos" ? activeStyle : {}} onClick={closeMenu}>
                         Pedidos
                     </NavLink>
                     <NavLink to='/personalizar_pastel' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/personalizar_pastel" ? activeStyle : {}} onClick={closeMenu}>

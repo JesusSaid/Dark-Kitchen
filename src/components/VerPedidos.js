@@ -3,8 +3,7 @@ import styles from "../styles/verPedidos.module.css"
 export default function VerPedidos(){
     return (
         <div className={styles.VerPedidos}>
-        
-            <table className={styles.table}>
+            <table>
                 <caption>Pedidos</caption>
                 <thead>
                     <tr>

@@ -11,9 +11,9 @@ const features = [
   
 const Eventos = () => {
     return (
-        <div className="bg-white">
-        <div className="mx-auto grid max-w-2x2 grid-cols-1 items-center gap-x-5 gap-y-16 px-10 py-10 sm:px-4 sm:py-32 lg:max-w-7x3 lg:grid-cols-2 lg:px-10">
-          <div>
+        <div className="bg-white">  
+        <div className="mx-auto grid max-w-2x2 grid-cols-1 items-center  gap-y-16 px-10 py-10 sm:px-4 sm:py-12 lg:max-w-7x3 lg:grid-cols-2 lg:px-10">
+        <div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Nuestros eventos</h2>
             <p className="mt-4 text-gray-500">
               Contamos con servicio de banquetes, mesas de dulces, somos tu opcion perfecta para fiestas, bodas, cumpleanios etc.
@@ -28,7 +28,7 @@ const Eventos = () => {
               ))}
             </dl>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6  lg:gap-8">
             <img
               src="https://oasisfloral.mx/cdn/shop/articles/pastel_con_flores_2_900x.png?v=1605047396"
               alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
@@ -50,8 +50,11 @@ const Eventos = () => {
               className="rounded-lg bg-gray-100"
             />
           </div>
+          
         </div>
+        
       </div>
+      
     )
 }
 

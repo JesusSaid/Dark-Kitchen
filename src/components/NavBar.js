@@ -3,8 +3,9 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faHome, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import Style from "../styles/navbar.module.css";
-
+import ShoppingCarSide from "./shoppingCarSide";
 export default function NavBar() {
+    const [showShoppingCar, setShowShoppingCar] = useState(false); // Estado para controlar la visibilidad de ShoppingCarSide
     const [activeStyle, setActiveStyle] = useState({});
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
@@ -37,6 +38,9 @@ export default function NavBar() {
         setIsMenuOpen(false);
     };
 
+    const handleClick = () => {
+        setShowShoppingCar(true); // Mostrar el componente cuando se hace clic
+    };
     return (
         <>
             <div className={Style.papelPicadoContainer}></div>
@@ -63,14 +67,14 @@ export default function NavBar() {
                     <NavLink to='/eventos' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/eventos" ? activeStyle : {}} onClick={closeMenu}>
                         Eventos
                     </NavLink>
-                    <NavLink 
+                    <NavLink
                         style={location.pathname === "/carrito" ? activeStyle : {}}
                         aria-label="Carrito"
-                        to="/carrito" 
-                        className={Style.navbarNavLink} 
+                        className={Style.navbarNavLink}
                         activeClassName="activo"
-                        onClick={closeMenu}>
-                        <FontAwesomeIcon icon={faShoppingCart} />
+                        onClick={handleClick}
+                        >
+                            <FontAwesomeIcon icon={faShoppingCart} />
                     </NavLink>
                     <NavLink 
                         style={location.pathname === "/yo" ? activeStyle : {}}
@@ -81,6 +85,9 @@ export default function NavBar() {
                         onClick={closeMenu}>
                         <FontAwesomeIcon icon={faUser} />
                     </NavLink>
+                    {showShoppingCar && <ShoppingCarSide onClose={true}/>}
+
+       
                 </div>
             </nav>
         </>

@@ -13,12 +13,12 @@ const Eventos = () => {
     return (
         <div className="bg-white">  
         <div className="mx-auto grid max-w-2x2 grid-cols-1 items-center  gap-y-16 px-10 py-10 sm:px-4 sm:py-12 lg:max-w-7x3 lg:grid-cols-2 lg:px-10">
+        
         <div>
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Nuestros eventos</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Nuestros eventos</h2>
             <p className="mt-4 text-gray-500">
               Contamos con servicio de banquetes, mesas de dulces, somos tu opcion perfecta para fiestas, bodas, cumpleanios etc.
-            </p>
-  
+            </p>    
             <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
               {features.map((feature) => (
                 <div key={feature.name} className="border-t border-gray-200 pt-4">

@@ -27,13 +27,10 @@ const products = [
   // More products...
 ]
 
-const ShoppingCarSide = ({ onClose }) => {
-  const [open, setOpen] = useState(onClose)
-  
-
+const ShoppingCarSide = ({ isOpen, onClose }) => {
   return (
-    <Transition show={open}>
-      <Dialog className="relative z-10" onClose={setOpen}>
+    <Transition show={isOpen}>
+      <Dialog className="relative z-10" onClose={onClose}>
         <TransitionChild
           enter="ease-in-out duration-500"
           enterFrom="opacity-0"
@@ -65,7 +62,7 @@ const ShoppingCarSide = ({ onClose }) => {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close panel</span>
@@ -137,7 +134,7 @@ const ShoppingCarSide = ({ onClose }) => {
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                           >
                             Continue Shopping
                             <span aria-hidden="true"> &rarr;</span>

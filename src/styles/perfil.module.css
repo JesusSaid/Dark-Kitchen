@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.welcomeMessage {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+}
+
+.loginButton, .logoutButton {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    color: white;
+    background-color: #4285F4;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loginButton:hover, .logoutButton:hover {
+    background-color: #357ae8;
+}
+
+.logoutButton {
+    background-color: #d9534f;
+}
+
+.logoutButton:hover {
+    background-color: #c9302c;
+}

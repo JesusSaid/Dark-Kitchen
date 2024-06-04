@@ -4,8 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faHome, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import Style from "../styles/navbar.module.css";
 import ShoppingCarSide from "./shoppingCarSide";
+
 export default function NavBar() {
-    const [showShoppingCar, setShowShoppingCar] = useState(false); // Estado para controlar la visibilidad de ShoppingCarSide
+    const [showShoppingCar, setShowShoppingCar] = useState(false); 
     const [activeStyle, setActiveStyle] = useState({});
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
@@ -38,9 +39,10 @@ export default function NavBar() {
         setIsMenuOpen(false);
     };
 
-    const handleClick = () => {
-        setShowShoppingCar(true); // Mostrar el componente cuando se hace clic
+    const handleShoppingCarToggle = () => {
+        setShowShoppingCar(!showShoppingCar); // Toggle el componente cuando se hace clic
     };
+
     return (
         <>
             <div className={Style.papelPicadoContainer}></div>
@@ -72,7 +74,7 @@ export default function NavBar() {
                         aria-label="Carrito"
                         className={Style.navbarNavLink}
                         activeClassName="activo"
-                        onClick={handleClick}
+                        onClick={handleShoppingCarToggle}
                         >
                             <FontAwesomeIcon icon={faShoppingCart} />
                     </NavLink>
@@ -85,9 +87,7 @@ export default function NavBar() {
                         onClick={closeMenu}>
                         <FontAwesomeIcon icon={faUser} />
                     </NavLink>
-                    {showShoppingCar && <ShoppingCarSide onClose={true}/>}
-
-       
+                    {showShoppingCar && <ShoppingCarSide isOpen={showShoppingCar} onClose={() => setShowShoppingCar(false)}/>}
                 </div>
             </nav>
         </>

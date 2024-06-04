@@ -3,6 +3,8 @@ import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { auth, db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
   const [cart, setCart] = useState([]);
@@ -48,6 +50,7 @@ const handleRemoveFromCart = async (productId) => {
       const updatedCart = userDoc.data().cart.filter(item => item.productId !== productId);
       await setDoc(userRef, { cart: updatedCart }, { merge: true });
       setCart(updatedCart);
+      toast.success("Producto eliminado del carrito.");
       calculateSubtotal(updatedCart);
     } else {
       console.error("El documento del usuario no existe.");
@@ -56,7 +59,6 @@ const handleRemoveFromCart = async (productId) => {
     console.error("Error removing item from cart: ", error);
   }
 };
-
 
   return (
     <Transition show={isOpen}>

@@ -6,6 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { auth, db } from '../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Catalogue() {
     const [catalogueData, setCatalogueData] = useState(null);
@@ -58,7 +60,7 @@ export default function Catalogue() {
     const addToCart = async (productId, productName, productPrice) => {
         const user = auth.currentUser;
         if (!user) {
-            alert("Por favor, inicia sesión para añadir productos al carrito.");
+            toast.error("Por favor, inicia sesión para añadir productos al carrito.");
             return;
         }
     
@@ -72,14 +74,14 @@ export default function Catalogue() {
                 cart.push({ productId: productId, name: productName, price: productPrice });
                 // Actualizar el documento del usuario con el nuevo carrito
                 await setDoc(userRef, { cart: cart }, { merge: true });
-                alert("Producto añadido al carrito.");
+                toast.success("Producto añadido al carrito.");
             } else {
                 console.error("El documento del usuario no existe.");
-                alert("Hubo un error al añadir el producto al carrito.");
+                toast.error("Hubo un error al añadir el producto al carrito.");
             }
         } catch (error) {
             console.error("Error adding to cart: ", error);
-            alert("Hubo un error al añadir el producto al carrito.");
+            toast.error("Hubo un error al añadir el producto al carrito");
         }
     };        
 

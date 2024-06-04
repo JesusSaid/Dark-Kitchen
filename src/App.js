@@ -8,11 +8,14 @@ import PersonalizarPastel from "./components/PersonalizarPastel";
 import ProductDetails from "./components/ProductDetails";
 import Eventos from "./components/eventos";
 import VerPedidos from "./components/VerPedidos";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <BrowserRouter>
       <NavBar />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalogo" element={<Catalogue />} />

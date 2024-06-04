@@ -4,12 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes, faHome, faShoppingCart, faUser } from "@fortawesome/free-solid-svg-icons";
 import Style from "../styles/navbar.module.css";
 import ShoppingCarSide from "./shoppingCarSide";
+import { auth } from '../firebase';
 
 export default function NavBar() {
     const [showShoppingCar, setShowShoppingCar] = useState(false); 
     const [activeStyle, setActiveStyle] = useState({});
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         if (location.pathname === "/") {
@@ -30,6 +32,19 @@ export default function NavBar() {
             setActiveStyle({});
         }
     }, [location]);
+
+    useEffect(() => {
+        // Verificar si hay un usuario autenticado
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUserId(user.uid); // Obtener el userId y almacenarlo en el estado
+            } else {
+                setUserId(null); // Si no hay usuario autenticado, establecer userId como null
+            }
+        });
+
+        return () => unsubscribe(); // Limpiar suscripción al desmontar el componente
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -87,7 +102,7 @@ export default function NavBar() {
                         onClick={closeMenu}>
                         <FontAwesomeIcon icon={faUser} />
                     </NavLink>
-                    {showShoppingCar && <ShoppingCarSide isOpen={showShoppingCar} onClose={() => setShowShoppingCar(false)}/>}
+                    {showShoppingCar && <ShoppingCarSide isOpen={showShoppingCar} onClose={() => setShowShoppingCar(false)} userId={userId}/>}
                 </div>
             </nav>
         </>

@@ -73,11 +73,14 @@ const Perfil = () => {
                 <div>
                     <h1 className={styles.welcomeMessage}>Bienvenido, {user.displayName}!</h1>
                     <button className={styles.logoutButton} onClick={handleLogout}>Cerrar sesión</button>
-                    <div>
-                        <h2>Carrito de Compras</h2>
-                        <ul>
+                    <div className={styles.cartContainer}>
+                        <h2 className={styles.cartTitle}>Carrito de Compras</h2>
+                        <ul className={styles.cartList}>
                             {cart.map(item => (
-                                <li key={item.id}>{item.name} - ${item.price}</li>
+                                <li key={item.productId} className={styles.cartItem}>
+                                    <span className={styles.itemName}>{item.name}</span> - 
+                                    <span className={styles.itemPrice}> ${item.price}</span>
+                                </li>
                             ))}
                         </ul>
                     </div>

@@ -29,8 +29,39 @@
 
 .logoutButton {
     background-color: #d9534f;
+    position: absolute;
+    top: 5rem;
+    right: 1rem;
 }
 
 .logoutButton:hover {
     background-color: #c9302c;
+}
+
+.cartContainer {
+    margin-top: 20px;
+}
+
+.cartTitle {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.cartList {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.cartItem {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.itemName {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.itemPrice {
+    margin-left: 5px;
 }

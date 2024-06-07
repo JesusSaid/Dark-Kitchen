@@ -1,13 +1,11 @@
 import React, {useState} from "react";
 import Style from "../styles/personalozarPastel.module.css"
 
-
 const PersonalizarPastel = () => {
     const [peopleOption, setPeopleOption] = useState("");
     const [charactersOption, setCharactersOption] = useState("");
     const [panFlavor, setPanFlavor] = useState("");
     const [fillingFlavor, setFillingFlavor] = useState("");
-
 
     const today = new Date();
     const twoDaysAhead = new Date(today);
@@ -16,13 +14,13 @@ const PersonalizarPastel = () => {
 
 
     return (
-      <div className={Style.contenedorPrincipal}>
+        <div className={Style.contenedorPrincipal}>
             <h1 className={Style.tituloPrincipal}>Personaliza tu Pastel</h1>
             <div className={Style.recuadroAviso}>
                 ¿Quieres tu pastel para este {formattedDate}? ¡Haz tu pedido HOY!
             </div>
             <div className={Style.descripcion}>
-                <strong>Descripcion</strong>
+                <strong>Descripción</strong>
                 <p>Hacemos cualquier Modelo o Idea</p>
                 <p>Solo llena este formato con los detalles de tu pastel. Puedes subir fotos y todos los detalles del modelo que quieres:</p>
             </div>
@@ -33,8 +31,8 @@ const PersonalizarPastel = () => {
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Tamaño</label>
                     <p className={Style.letraSecundaria}>¿Para cuántas personas?</p>
-                    <select value={peopleOption} onChange={e => setPeopleOption(e.target.value)} className={Style.select}>
-                        <option value="">Seleccionar una opción</option>
+                    <select value={peopleOption} onChange={e => setPeopleOption(e.target.value)} className={Style.select} required>
+                        <option value="" disabled>Seleccionar una opción</option>
                         <option value="4-6">4-6 personas (+$400)</option>
                         <option value="6-10">6-10 personas (+$1,000)</option>
                         <option value="10-20">10-20 personas (+$1,180)</option>
@@ -45,8 +43,8 @@ const PersonalizarPastel = () => {
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Cantidad de personajes 3D</label>
                     <p className={Style.letraSecundaria}>¿Cuántos personajes en 3D quieres?</p>
-                    <select value={charactersOption} onChange={e => setCharactersOption(e.target.value)} className={Style.select}>
-                        <option value="">Seleccionar una opción</option>
+                    <select value={charactersOption} onChange={e => setCharactersOption(e.target.value)} className={Style.select} required>
+                        <option value="" disabled>Seleccionar una opción</option>
                         <option value="0">Sin personajes</option>
                         <option value="1">1 personaje (+$250)</option>
                         <option value="2">2 personajes (+$500)</option>

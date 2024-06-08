@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
   const [cart, setCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -57,6 +58,16 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
       }
     } catch (error) {
       console.error("Error removing item from cart: ", error);
+    }
+  };
+
+  const handleContinueClick = () => {
+    // Si el subtotal es mayor a 0, mostramos el modal "Comprando"
+    if (subtotal > 0) {
+      setShowModal(true);
+    } else {
+      // De lo contrario, simplemente cerramos el carrito
+      onClose();
     }
   };
 
@@ -158,7 +169,7 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
                       <div className="mt-6">
                         <button
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
-                          
+                          onClick={handleContinueClick}
                         >
                           Continuar
                         </button>
@@ -183,6 +194,34 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
           </div>
         </div>
       </Dialog>
+      {/* Modal "Comprando" */}
+      <Transition show={showModal}>
+        <Dialog className="fixed inset-0 z-10 overflow-y-auto" onClose={() => setShowModal(false)}>
+          <div className="flex items-center justify-center min-h-screen">
+            <TransitionChild
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <DialogPanel className="bg-white p-4 rounded-lg shadow-xl">
+                <DialogTitle className="text-lg font-medium text-gray-900">Comprando</DialogTitle>
+                <div className="mt-4 flex justify-end">
+                  <button
+                    type="button"
+                    className="text-indigo-600 hover:text-indigo-500 font-medium"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </Dialog>
+      </Transition>
     </Transition>
   )
 }

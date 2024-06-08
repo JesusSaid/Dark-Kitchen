@@ -72,9 +72,6 @@ export default function NavBar() {
                     <NavLink to='/' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/" ? activeStyle : {}} onClick={closeMenu}>
                         <FontAwesomeIcon icon={faHome} />
                     </NavLink>
-                    <NavLink to='/verPedidos' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/verPedidos" ? activeStyle : {}} onClick={closeMenu}>
-                        Pedidos
-                    </NavLink>
                     <NavLink to='/personalizar_pastel' activeclassname="activo" className={Style.navbarNavLink} style={location.pathname === "/personalizar_pastel" ? activeStyle : {}} onClick={closeMenu}>
                         Personalizar
                     </NavLink>
@@ -88,7 +85,7 @@ export default function NavBar() {
                         style={location.pathname === "/carrito" ? activeStyle : {}}
                         aria-label="Carrito"
                         className={Style.navbarNavLink}
-                        activeClassName="activo"
+                        activeclassname="activo"
                         onClick={handleShoppingCarToggle}
                         >
                             <FontAwesomeIcon icon={faShoppingCart} />
@@ -98,7 +95,7 @@ export default function NavBar() {
                         aria-label="Perfil"
                         to="/yo" 
                         className={Style.navbarNavLink} 
-                        activeClassName="" 
+                        activeclassname="activo" 
                         onClick={closeMenu}>
                         <FontAwesomeIcon icon={faUser} />
                     </NavLink>

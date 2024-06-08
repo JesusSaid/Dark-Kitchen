@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { auth, db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Style from "../styles/shoppingCarSide.module.css";
 
 const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
   const [cart, setCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const fetchCart = async () => {
       try {
         if (!userId) {
-          console.error("El userId es undefined");
           return;
         }
         const userRef = doc(db, 'users', userId);
@@ -35,30 +37,40 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
     fetchCart();
   }, [isOpen, userId]);
 
-// Función para calcular el subtotal
-const calculateSubtotal = (cartItems) => {
-  const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
-  setSubtotal(total);
-};
+  // Función para calcular el subtotal
+  const calculateSubtotal = (cartItems) => {
+    const total = cartItems.reduce((acc, item) => acc + parseFloat(item.precio), 0);
+    setSubtotal(total);
+  };
 
-const handleRemoveFromCart = async (productId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const userDoc = await getDoc(userRef);
+  const handleRemoveFromCart = async (productoId) => {
+    try {
+      const userRef = doc(db, 'users', userId);
+      const userDoc = await getDoc(userRef);
 
-    if (userDoc.exists()) {
-      const updatedCart = userDoc.data().cart.filter(item => item.productId !== productId);
-      await setDoc(userRef, { cart: updatedCart }, { merge: true });
-      setCart(updatedCart);
-      toast.success("Producto eliminado del carrito.");
-      calculateSubtotal(updatedCart);
-    } else {
-      console.error("El documento del usuario no existe.");
+      if (userDoc.exists()) {
+        const updatedCart = userDoc.data().cart.filter(item => item.productoId !== productoId);
+        await setDoc(userRef, { cart: updatedCart }, { merge: true });
+        setCart(updatedCart);
+        toast.success("Producto eliminado del carrito.");
+        calculateSubtotal(updatedCart);
+      } else {
+        console.error("El documento del usuario no existe.");
+      }
+    } catch (error) {
+      console.error("Error removing item from cart: ", error);
     }
-  } catch (error) {
-    console.error("Error removing item from cart: ", error);
-  }
-};
+  };
+
+  const handleContinueClick = () => {
+    // Si el subtotal es mayor a 0, mostramos el modal "Comprando"
+    if (subtotal > 0) {
+      setShowModal(true);
+    } else {
+      // De lo contrario, simplemente cerramos el carrito
+      onClose();
+    }
+  };
 
   return (
     <Transition show={isOpen}>
@@ -111,27 +123,44 @@ const handleRemoveFromCart = async (productId) => {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {cart.map((item) => (
-                              <li key={item.productId} className="flex py-6">
-                                {/* Item details */}
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>{item.name}</h3>
-                                      <div className="flex items-center">
-                                        <p className="ml-4">{item.price}</p>
-                                        <button
-                                          className="ml-2 text-gray-400 hover:text-gray-500 focus:outline-none"
-                                          onClick={() => handleRemoveFromCart(item.productId)}
-                                        >
-                                          <XMarkIcon className="h-5 w-5" aria-hidden="true" />
-                                        </button>
+                            {userId ? (
+                              cart.map((item) => (
+                                <li key={item.productoId} className="flex py-6">
+                                  {/* Item details */}
+                                  <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between items-center text-base font-medium text-gray-900">
+                                        <h3>{item.nombre}</h3>
+                                        {/* Verificar si es un pastel personalizado */}
+                                        {item.detalles && item.detalles.imagen ? (
+                                          <img src={item.detalles.imagen} alt={item.nombre} className={Style.imagen} />
+                                        ) : (
+                                          <img src={item.imagen} alt={item.nombre} className={Style.imagen} />
+                                        )}
+                                        <div className="flex items-center">
+                                          <p className="ml-4">{item.precio}</p>
+                                          <button
+                                            className="ml-2 text-gray-400 hover:text-gray-500 focus:outline-none"
+                                            onClick={() => handleRemoveFromCart(item.productoId)}
+                                          >
+                                            <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </li>
-                            ))}
+                                </li>
+                              ))
+                            ) : (
+                              <>
+                                <li className="flex py-6">
+                                  <p className="ml-4 text-gray-500">Favor de iniciar sesión</p>
+                                </li>
+                                <Link to="/yo" onClick={onClose} className="ml-2 text-indigo-600 hover:text-indigo-500">
+                                  Ir a iniciar sesión
+                                </Link>
+                              </>
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -143,18 +172,17 @@ const handleRemoveFromCart = async (productId) => {
                         <p>Subtotal</p>
                         <p>${subtotal.toFixed(2)}</p> {/* Mostrar el subtotal */}
                       </div>
-                      <p className="mt-0.5 text-sm text-gray-500">Carrito de compras</p>
+                      <p className="text-sm text-gray-500">*Pueden agregarse costos de envío</p>
                       <div className="mt-6">
-                        <a
-                          href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                        <button
+                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
+                          onClick={handleContinueClick}
                         >
                           Continuar
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                          o{' '}
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -173,6 +201,34 @@ const handleRemoveFromCart = async (productId) => {
           </div>
         </div>
       </Dialog>
+      {/* Modal "Comprando" */}
+      <Transition show={showModal}>
+        <Dialog className="fixed inset-0 z-10 overflow-y-auto" onClose={() => setShowModal(false)}>
+          <div className="flex items-center justify-center min-h-screen">
+            <TransitionChild
+              enter="ease-out duration-300"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <DialogPanel className="bg-white p-4 rounded-lg shadow-xl">
+                <DialogTitle className="text-lg font-medium text-gray-900">Comprando</DialogTitle>
+                <div className="mt-4 flex justify-end">
+                  <button
+                    type="button"
+                    className="text-indigo-600 hover:text-indigo-500 font-medium"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cerrar
+                  </button>
+                </div>
+              </DialogPanel>
+            </TransitionChild>
+          </div>
+        </Dialog>
+      </Transition>
     </Transition>
   )
 }

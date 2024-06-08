@@ -57,10 +57,10 @@ export default function Catalogue() {
         setSearchText(text);
     };
 
-    const addToCart = async (productId, productName, productPrice) => {
+    const addToCart = async (productId, productName, productPrice, productImage) => {
         const user = auth.currentUser;
         if (!user) {
-            toast.error("Por favor, inicia sesión para añadir productos al carrito.");
+            toast.info("Por favor, inicia sesión para añadir productos al carrito.");
             return;
         }
     
@@ -71,7 +71,12 @@ export default function Catalogue() {
             if (userDoc.exists()) {
                 const cart = userDoc.data().cart || [];
                 // Agregar el nuevo producto al carrito existente
-                cart.push({ productId: productId, name: productName, price: productPrice });
+                cart.push({ 
+                    productoId: productId, 
+                    nombre: productName, 
+                    precio: productPrice,
+                    imagen: productImage // Agregar la URL de la imagen al carrito
+                });
                 // Actualizar el documento del usuario con el nuevo carrito
                 await setDoc(userRef, { cart: cart }, { merge: true });
                 toast.success("Producto añadido al carrito.");
@@ -83,7 +88,7 @@ export default function Catalogue() {
             console.error("Error adding to cart: ", error);
             toast.error("Hubo un error al añadir el producto al carrito");
         }
-    };        
+    };           
 
     return (
         <main>
@@ -95,6 +100,7 @@ export default function Catalogue() {
                     placeholder={placeholders[placeholderIndex]}
                     value={searchText}
                     onChange={handleSearchChange}
+                    autoComplete="off"
                 />
             </div>
             <hr/>
@@ -117,7 +123,7 @@ export default function Catalogue() {
                     </Link>
                     <div className={Style.cardfooter}>
                         <span className={Style.texttitle}>${catalogue.precio}</span>
-                        <div className={Style.cardbutton} onClick={() => addToCart(catalogue._id, catalogue.titulo, catalogue.precio)}>
+                        <div className={Style.cardbutton} onClick={() => addToCart(catalogue._id, catalogue.titulo, catalogue.precio, catalogue.imagen.asset.url)}>
                             <FontAwesomeIcon icon={faShoppingCart} />
                         </div>
                     </div>

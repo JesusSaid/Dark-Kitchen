@@ -12,7 +12,6 @@ const PersonalizarPastel = () => {
     twoDaysAhead.setDate(today.getDate() + 3);
     const formattedDate = twoDaysAhead.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
 
-
     return (
         <div className={Style.contenedorPrincipal}>
             <h1 className={Style.tituloPrincipal}>Personaliza tu Pastel</h1>
@@ -39,7 +38,6 @@ const PersonalizarPastel = () => {
                     </select>
                 </div>
 
-
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Cantidad de personajes 3D</label>
                     <p className={Style.letraSecundaria}>¿Cuántos personajes en 3D quieres?</p>
@@ -52,13 +50,11 @@ const PersonalizarPastel = () => {
                     </select>
                 </div>
 
-
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Descripción Personajes 3D</label>
                     <p className={Style.letraSecundaria}>Describe los personajes en 3D que quieres</p>
                     <textarea rows="2" className={Style.cajaTexto}></textarea>
                 </div>
-
 
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Frase y/o Número que llevará tu pastel</label>
@@ -66,20 +62,17 @@ const PersonalizarPastel = () => {
                     <textarea rows="2" className={Style.cajaTexto}></textarea>
                 </div>
 
-
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Especifica los Detalles Especiales</label>
                     <p className={Style.letraSecundaria}>Por ej. colores, adornos especiales, etc</p>
                     <textarea rows="2" className={Style.cajaTexto}></textarea>
                 </div>
 
-
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Sube la Foto de Modelo que quieres</label>
                     <p className={Style.letraSecundaria}>Aceptamos JPG, JPEG o PNG</p>
                     <input type="file" accept="image/*" className={Style.fileInput} />
                 </div>
-
 
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Sabor del pan</label>
@@ -89,7 +82,6 @@ const PersonalizarPastel = () => {
                         <label><input type="radio" name="panFlavor" value="Zebra" onChange={e => setPanFlavor(e.target.value)} /> Zebra (pan vainilla y chocolate)</label>
                     </div>
                 </div>
-
 
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Sabor de relleno</label>
@@ -102,14 +94,11 @@ const PersonalizarPastel = () => {
                     </select>
                 </div>
 
-
                 <button className={Style.botonCarrito}>Agregar al carrito</button>
             </div>
         </div>
     )
 
-
 }
-
 
 export default PersonalizarPastel

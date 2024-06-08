@@ -5,19 +5,16 @@
     margin: 20px;
 }
 
-
 .tituloPrincipal {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
-
 .contenedorImg {
     flex: 1;
     margin-bottom: 20px;
 }
-
 
 .imagen {
     width: 100%;
@@ -25,14 +22,12 @@
     box-sizing: border-box;
 }
 
-
 .contenedorSecundario {
     flex: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
 }
-
 
 .recuadroAviso {
     background-color: lightgray;
@@ -43,17 +38,14 @@
     color: black;
 }
 
-
 .descripcion {
     text-align: center;
     margin-bottom: 20px;
 }
 
-
 .seccion {
     margin-bottom: 20px;
 }
-
 
 .letraPrincipal {
     color: black;
@@ -62,27 +54,23 @@
     display: block;
 }
 
-
 .letraSecundaria {
     color: gray;
     font-size: 14px;
     margin-bottom: 5px;
 }
 
-
 .cajaTexto {
-    width: 90%;
+    width: 100%;
     border: 1px solid black;
     resize: none;
     padding: 5px;
 }
 
-
 .radioGroup label {
     display: block;
     margin-bottom: 10px;
 }
-
 
 .select {
     width: 100%;
@@ -92,14 +80,12 @@
     font-size: 16px;
 }
 
-
 .fileInput {
     padding: 10px;
     border: 1px solid black;
     box-sizing: border-box;
     font-size: 16px;
 }
-
 
 .botonCarrito {
     background-color: rgb(230, 126, 34);
@@ -110,4 +96,13 @@
     cursor: pointer;
     align-self: center;
     margin-top: 20px;
+}
+
+@media (max-width: 430px) {
+    .contenedorSecundario{
+        width: 90%;
+    }
+    .fileInput{
+        width: 100%;
+    }
 }

@@ -12,6 +12,9 @@ const PersonalizarPastel = ({ userId }) => {
     const [panFlavor, setPanFlavor] = useState("");
     const [fillingFlavor, setFillingFlavor] = useState("");
     const [imagePreview, setImagePreview] = useState(null);
+    const [descripcionPersonajes, setDescripcionPersonajes] = useState("");
+    const [fraseNumero, setFraseNumero] = useState("");
+    const [detallesEspeciales, setDetallesEspeciales] = useState("");
 
     const today = new Date();
     const twoDaysAhead = new Date(today);
@@ -30,55 +33,68 @@ const PersonalizarPastel = ({ userId }) => {
     };
 
     const addToCart = async () => {
-        const user = auth.currentUser;
-        if (!user) {
-            toast.info("Por favor, inicia sesión para añadir productos al carrito.");
-            return;
-        }
-    
-        try {
-            const userRef = doc(db, 'users', user.uid);
-            const userDoc = await getDoc(userRef);
-    
-            if (userDoc.exists()) {
-                const cart = userDoc.data().cart || [];
-    
-                // Calcular el precio del pastel personalizado
-                let price = 0;
-                if (peopleOption === "4-6") price += 400;
-                else if (peopleOption === "6-10") price += 1000;
-                else if (peopleOption === "10-20") price += 1180;
-    
-                if (charactersOption === "1") price += 250;
-                else if (charactersOption === "2") price += 500;
-                else if (charactersOption === "3") price += 750;
-    
-                // Agregar el nuevo pastel personalizado al carrito existente
-                cart.push({ 
-                    nombre: "Pastel Personalizado", 
-                    precio: price, 
-                    productId: uuidv4(),
-                    detalles: { 
-                        tamanio: peopleOption,
-                        personajes: charactersOption,
-                        saborPan: panFlavor,
-                        saborRelleno: fillingFlavor,
-                        imagen: imagePreview
-                    }
-                });
+    const user = auth.currentUser;
+    if (!user) {
+        toast.info("Por favor, inicia sesión para añadir productos al carrito.");
+        return;
+    }
 
-                // Actualizar el documento del usuario con el nuevo carrito
-                await setDoc(userRef, { cart: cart }, { merge: true });
-                toast.success("Pastel personalizado añadido al carrito.");
-            } else {
-                console.error("El documento del usuario no existe.");
-                toast.error("Hubo un error al añadir el pastel personalizado al carrito.");
-            }
-        } catch (error) {
-            console.error("Error adding custom cake to cart: ", error);
+    try {
+        const userRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+            const cart = userDoc.data().cart || [];
+
+            // Calcular el precio del pastel personalizado
+            let price = 0;
+            if (peopleOption === "4-6") price += 400;
+            else if (peopleOption === "6-10") price += 1000;
+            else if (peopleOption === "10-20") price += 1180;
+
+            if (charactersOption === "1") price += 250;
+            else if (charactersOption === "2") price += 500;
+            else if (charactersOption === "3") price += 750;
+
+            // Agregar el nuevo pastel personalizado al carrito existente
+            cart.push({ 
+                nombre: "Pastel Personalizado", 
+                precio: price, 
+                productId: uuidv4(),
+                detalles: { 
+                    tamanio: peopleOption,
+                    personajes: charactersOption,
+                    saborPan: panFlavor,
+                    saborRelleno: fillingFlavor,
+                    imagen: imagePreview,
+                    descripcionPersonajes: descripcionPersonajes,
+                    fraseNumero: fraseNumero,
+                    detallesEspeciales: detallesEspeciales
+                }
+            });
+
+            // Actualizar el documento del usuario con el nuevo carrito
+            await setDoc(userRef, { cart: cart }, { merge: true });
+            toast.success("Pastel personalizado añadido al carrito.");
+
+            // Limpiar los estados después de agregar al carrito
+            setPeopleOption("");
+            setCharactersOption("");
+            setPanFlavor("");
+            setFillingFlavor("");
+            setImagePreview(null);
+            setDescripcionPersonajes("");
+            setFraseNumero("");
+            setDetallesEspeciales("");
+        } else {
+            console.error("El documento del usuario no existe.");
             toast.error("Hubo un error al añadir el pastel personalizado al carrito.");
         }
-    };       
+    } catch (error) {
+        console.error("Error adding custom cake to cart: ", error);
+        toast.error("Hubo un error al añadir el pastel personalizado al carrito.");
+    }
+};           
 
     return (
         <div className={Style.contenedorPrincipal}>
@@ -121,19 +137,19 @@ const PersonalizarPastel = ({ userId }) => {
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Descripción Personajes 3D</label>
                     <p className={Style.letraSecundaria}>Describe los personajes en 3D que quieres</p>
-                    <textarea rows="2" className={Style.cajaTexto}></textarea>
+                    <textarea rows="2" className={Style.cajaTexto} value={descripcionPersonajes} onChange={e => setDescripcionPersonajes(e.target.value)}></textarea>
                 </div>
 
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Frase y/o Número que llevará tu pastel</label>
                     <p className={Style.letraSecundaria}>Por ej. "Felicidades Tomás" 3</p>
-                    <textarea rows="2" className={Style.cajaTexto}></textarea>
+                    <textarea rows="2" className={Style.cajaTexto} value={fraseNumero} onChange={e => setFraseNumero(e.target.value)}></textarea>
                 </div>
 
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Especifica los Detalles Especiales</label>
                     <p className={Style.letraSecundaria}>Por ej. colores, adornos especiales, etc</p>
-                    <textarea rows="2" className={Style.cajaTexto}></textarea>
+                    <textarea rows="2" className={Style.cajaTexto} value={detallesEspeciales} onChange={e => setDetallesEspeciales(e.target.value)}></textarea>
                 </div>
 
                 <div className={Style.seccion}>
@@ -155,16 +171,16 @@ const PersonalizarPastel = ({ userId }) => {
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Sabor del pan</label>
                     <div className={Style.radioGroup}>
-                        <label><input type="radio" name="panFlavor" value="Vainilla" onChange={e => setPanFlavor(e.target.value)} /> Vainilla</label>
-                        <label><input type="radio" name="panFlavor" value="Chocolate" onChange={e => setPanFlavor(e.target.value)} /> Chocolate</label>
-                        <label><input type="radio" name="panFlavor" value="Zebra" onChange={e => setPanFlavor(e.target.value)} /> Zebra (pan vainilla y chocolate)</label>
+                        <label><input type="radio" name="panFlavor" value="Vainilla" checked={panFlavor === "Vainilla"} onChange={() => setPanFlavor("Vainilla")} /> Vainilla</label>
+                        <label><input type="radio" name="panFlavor" value="Chocolate" checked={panFlavor === "Chocolate"} onChange={() => setPanFlavor("Chocolate")} /> Chocolate</label>
+                        <label><input type="radio" name="panFlavor" value="Zebra" checked={panFlavor === "Zebra"} onChange={() => setPanFlavor("Zebra")} /> Zebra (pan vainilla y chocolate)</label>
                     </div>
                 </div>
 
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Sabor de relleno</label>
-                    <select value={fillingFlavor} onChange={e => setFillingFlavor(e.target.value)} className={Style.select}>
-                        <option value="">Seleccionar una opción</option>
+                    <select value={fillingFlavor} onChange={e => setFillingFlavor(e.target.value)} className={Style.select} required>
+                        <option value="" disabled>Seleccionar una opción</option>
                         <option value="Chocolate">Chocolate</option>
                         <option value="Vainilla">Vainilla</option>
                         <option value="Limón">Limón</option>

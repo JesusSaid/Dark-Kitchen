@@ -95,6 +95,7 @@ export default function Catalogue() {
                     placeholder={placeholders[placeholderIndex]}
                     value={searchText}
                     onChange={handleSearchChange}
+                    autoComplete="off"
                 />
             </div>
             <hr/>

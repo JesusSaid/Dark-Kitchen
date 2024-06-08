@@ -4,13 +4,20 @@ import { auth, googleProvider, db } from '../firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import Charts from './charts';
 import styles from '../styles/perfil.module.css';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Perfil = () => {
     const [user, setUser] = useState(null);
     const [cart, setCart] = useState([]);
     const [userType, setUserType] = useState(null);
+    const [userData, setUserData] = useState({});
+    const [isEditing, setIsEditing] = useState(false);
+    const [formData, setFormData] = useState({
+        nombre: '',
+        address: '',
+        phone: ''
+    });
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -26,6 +33,14 @@ const Perfil = () => {
 
         return () => unsubscribe();
     }, []);
+
+    useEffect(() => {
+        setFormData({
+            nombre: userData.nombre || '',
+            address: userData.address || '',
+            phone: userData.phone || ''
+        });
+    }, [userData]);
 
     const handleLogin = async () => {
         try {
@@ -54,7 +69,7 @@ const Perfil = () => {
             if (userDoc.exists()) {
                 const userData = userDoc.data();
                 setUserType(userData.type);
-                setCart(userData.cart || []);
+                setUserData(userData);
             } else {
                 console.error("El documento del usuario no existe.");
             }
@@ -67,13 +82,51 @@ const Perfil = () => {
         const userRef = doc(db, 'users', currentUser.uid);
         const docSnap = await getDoc(userRef);
         if (!docSnap.exists()) {
-            await setDoc(userRef, { type: 2, cart: [] });
+            const { displayName, email } = currentUser;
+            const userData = {
+                type: 2,
+                nombre: displayName,
+                cart: [],
+                address: '',
+                phone: '',
+                email: email
+            };
+            await setDoc(userRef, userData);
+        }
+    };
+
+    const handleEdit = () => {
+        setIsEditing(true);
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const userRef = doc(db, 'users', user.uid);
+        try {
+            await setDoc(userRef, { ...userData, ...formData }, { merge: true });
+            setUserData({ ...userData, ...formData });
+            setIsEditing(false);
+            toast.success("Datos actualizados correctamente");
+        } catch (error) {
+            console.error("Error updating user data: ", error);
+            toast.error("Error al actualizar datos");
         }
     };
 
     return (
         <div className={styles.container}>
-            <ToastContainer />
             {user ? (
                 <div>
                     {userType === 1 ? (
@@ -85,18 +138,36 @@ const Perfil = () => {
                     ) : (
                         <div>
                             <h1 className={styles.welcomeMessage}>Bienvenido, {user.displayName}!</h1>
+                            {isEditing ? (
+                                <form className={styles.datos} onSubmit={handleSubmit}>
+                                    <label>
+                                        <strong>Nombre:</strong>
+                                        <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} />
+                                    </label>
+                                    <label>
+                                        <strong>Dirección:</strong>
+                                        <input type="text" name="address" value={formData.address} onChange={handleChange} />
+                                    </label>
+                                    <label>
+                                        <strong>Teléfono:</strong>
+                                        <input type="text" name="phone" value={formData.phone} onChange={handleChange} />
+                                    </label>
+                                    <div>
+                                        <button type="submit" className={styles.botonGuardar}>Guardar</button>
+                                        <span style={{ marginRight: '1rem' }}></span>
+                                        <button type="button" className={styles.botonCancelar} onClick={handleCancelEdit}>Cancelar</button>
+                                    </div>
+                                </form>
+                            ) : (
+                                <div className={styles.datosUsuario}>
+                                    <p><strong>Nombre: </strong> {userData.nombre}</p>
+                                    <p><strong>Dirección: </strong> {userData.address}</p>
+                                    <p><strong>Teléfono: </strong> {userData.phone}</p>
+                                    <p><strong>Correo electrónico: </strong> {user.email}</p>
+                                    <button className={styles.boton} onClick={handleEdit}>Editar</button>
+                                </div>
+                            )}
                             <button className={styles.logoutButton} onClick={handleLogout}>Cerrar sesión</button>
-                            <div className={styles.cartContainer}>
-                                <h2 className={styles.cartTitle}>Carrito de Compras</h2>
-                                <ul className={styles.cartList}>
-                                    {cart.map(item => (
-                                        <li key={item.productId} className={styles.cartItem}>
-                                            <span className={styles.itemName}>{item.name}</span> - 
-                                            <span className={styles.itemPrice}> ${item.price}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
                         </div>
                     )}
                 </div>

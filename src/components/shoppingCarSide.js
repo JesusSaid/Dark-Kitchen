@@ -37,17 +37,17 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
 
   // Función para calcular el subtotal
   const calculateSubtotal = (cartItems) => {
-    const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
+    const total = cartItems.reduce((acc, item) => acc + parseFloat(item.precio), 0);
     setSubtotal(total);
   };
 
-  const handleRemoveFromCart = async (productId) => {
+  const handleRemoveFromCart = async (productoId) => {
     try {
       const userRef = doc(db, 'users', userId);
       const userDoc = await getDoc(userRef);
 
       if (userDoc.exists()) {
-        const updatedCart = userDoc.data().cart.filter(item => item.productId !== productId);
+        const updatedCart = userDoc.data().cart.filter(item => item.productoId !== productoId);
         await setDoc(userRef, { cart: updatedCart }, { merge: true });
         setCart(updatedCart);
         toast.success("Producto eliminado del carrito.");
@@ -113,17 +113,17 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
                             {userId ? (
                               cart.map((item) => (
-                                <li key={item.productId} className="flex py-6">
+                                <li key={item.productoId} className="flex py-6">
                                   {/* Item details */}
                                   <div className="ml-4 flex flex-1 flex-col">
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
-                                        <h3>{item.name}</h3>
+                                        <h3>{item.nombre}</h3>
                                         <div className="flex items-center">
-                                          <p className="ml-4">{item.price}</p>
+                                          <p className="ml-4">{item.precio}</p>
                                           <button
                                             className="ml-2 text-gray-400 hover:text-gray-500 focus:outline-none"
-                                            onClick={() => handleRemoveFromCart(item.productId)}
+                                            onClick={() => handleRemoveFromCart(item.productoId)}
                                           >
                                             <XMarkIcon className="h-5 w-5" aria-hidden="true" />
                                           </button>
@@ -157,9 +157,8 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
                       <p className="mt-0.5 text-sm text-gray-500">Carrito de compras</p>
                       <div className="mt-6">
                         <button
-                          href="#"
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
-                          onClick={onClose}
+                          
                         >
                           Continuar
                         </button>

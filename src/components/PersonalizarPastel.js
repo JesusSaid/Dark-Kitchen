@@ -33,6 +33,11 @@ const PersonalizarPastel = ({ userId }) => {
     };
 
     const addToCart = async () => {
+        // Validar si todos los campos están completos
+    if (!peopleOption || !charactersOption || !panFlavor || !fillingFlavor || !imagePreview || !descripcionPersonajes || !fraseNumero || !detallesEspeciales) {
+        toast.error("Por favor, completa todos los campos antes de agregar al carrito.");
+        return;
+    }
     const user = auth.currentUser;
     if (!user) {
         toast.info("Por favor, inicia sesión para añadir productos al carrito.");
@@ -60,7 +65,7 @@ const PersonalizarPastel = ({ userId }) => {
             cart.push({ 
                 nombre: "Pastel Personalizado", 
                 precio: price, 
-                productId: uuidv4(),
+                productoId: uuidv4(),
                 detalles: { 
                     tamanio: peopleOption,
                     personajes: charactersOption,

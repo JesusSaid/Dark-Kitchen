@@ -71,7 +71,7 @@ export default function Catalogue() {
             if (userDoc.exists()) {
                 const cart = userDoc.data().cart || [];
                 // Agregar el nuevo producto al carrito existente
-                cart.push({ productId: productId, name: productName, price: productPrice });
+                cart.push({ productoId: productId, nombre: productName, precio: productPrice });
                 // Actualizar el documento del usuario con el nuevo carrito
                 await setDoc(userRef, { cart: cart }, { merge: true });
                 toast.success("Producto añadido al carrito.");

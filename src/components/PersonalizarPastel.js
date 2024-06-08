@@ -6,11 +6,23 @@ const PersonalizarPastel = () => {
     const [charactersOption, setCharactersOption] = useState("");
     const [panFlavor, setPanFlavor] = useState("");
     const [fillingFlavor, setFillingFlavor] = useState("");
+    const [imagePreview, setImagePreview] = useState(null);
 
     const today = new Date();
     const twoDaysAhead = new Date(today);
     twoDaysAhead.setDate(today.getDate() + 3);
     const formattedDate = twoDaysAhead.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    const handleImageChange = (e) => {
+        const selectedImage = e.target.files[0];
+        if (selectedImage) {
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(selectedImage);
+        }
+    };
 
     return (
         <div className={Style.contenedorPrincipal}>
@@ -71,7 +83,17 @@ const PersonalizarPastel = () => {
                 <div className={Style.seccion}>
                     <label className={Style.letraPrincipal}>Sube la Foto de Modelo que quieres</label>
                     <p className={Style.letraSecundaria}>Aceptamos JPG, JPEG o PNG</p>
-                    <input type="file" accept="image/*" className={Style.fileInput} />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        className={Style.fileInput}
+                        onChange={handleImageChange}
+                    />
+                    <div className={Style.imagenElegida}>
+                        {imagePreview && (
+                            <img src={imagePreview} alt="Preview" className={Style.imagePreview} />
+                        )}
+                    </div>
                 </div>
 
                 <div className={Style.seccion}>

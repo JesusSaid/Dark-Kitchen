@@ -87,6 +87,19 @@
     font-size: 16px;
 }
 
+.imagePreview{
+    width: 10rem;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+}
+
+.imagenElegida{
+    display: grid;
+    place-items: center;
+    margin-top: 10px;
+}
+
 .botonCarrito {
     background-color: rgb(230, 126, 34);
     color: white;

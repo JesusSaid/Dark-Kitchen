@@ -60,7 +60,7 @@ export default function Catalogue() {
     const addToCart = async (productId, productName, productPrice) => {
         const user = auth.currentUser;
         if (!user) {
-            toast.error("Por favor, inicia sesión para añadir productos al carrito.");
+            toast.info("Por favor, inicia sesión para añadir productos al carrito.");
             return;
         }
     

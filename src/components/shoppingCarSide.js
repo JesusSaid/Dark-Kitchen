@@ -6,6 +6,7 @@ import { auth, db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Style from "../styles/shoppingCarSide.module.css";
 
 const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
   const [cart, setCart] = useState([]);
@@ -128,8 +129,14 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
                                   {/* Item details */}
                                   <div className="ml-4 flex flex-1 flex-col">
                                     <div>
-                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                      <div className="flex justify-between items-center text-base font-medium text-gray-900">
                                         <h3>{item.nombre}</h3>
+                                        {/* Verificar si es un pastel personalizado */}
+                                        {item.detalles && item.detalles.imagen ? (
+                                          <img src={item.detalles.imagen} alt={item.nombre} className={Style.imagen} />
+                                        ) : (
+                                          <img src={item.imagen} alt={item.nombre} className={Style.imagen} />
+                                        )}
                                         <div className="flex items-center">
                                           <p className="ml-4">{item.precio}</p>
                                           <button

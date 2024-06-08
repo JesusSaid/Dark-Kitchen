@@ -165,7 +165,7 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
                         <p>Subtotal</p>
                         <p>${subtotal.toFixed(2)}</p> {/* Mostrar el subtotal */}
                       </div>
-                      <p className="mt-0.5 text-sm text-gray-500">Carrito de compras</p>
+                      <p className="text-sm text-gray-500">*Pueden agregarse costos de envío</p>
                       <div className="mt-6">
                         <button
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"

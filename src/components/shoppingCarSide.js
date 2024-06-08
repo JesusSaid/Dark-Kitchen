@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { auth, db } from '../firebase';
@@ -14,7 +15,6 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
     const fetchCart = async () => {
       try {
         if (!userId) {
-          console.error("El userId es undefined");
           return;
         }
         const userRef = doc(db, 'users', userId);
@@ -35,30 +35,30 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
     fetchCart();
   }, [isOpen, userId]);
 
-// Función para calcular el subtotal
-const calculateSubtotal = (cartItems) => {
-  const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
-  setSubtotal(total);
-};
+  // Función para calcular el subtotal
+  const calculateSubtotal = (cartItems) => {
+    const total = cartItems.reduce((acc, item) => acc + parseFloat(item.price), 0);
+    setSubtotal(total);
+  };
 
-const handleRemoveFromCart = async (productId) => {
-  try {
-    const userRef = doc(db, 'users', userId);
-    const userDoc = await getDoc(userRef);
+  const handleRemoveFromCart = async (productId) => {
+    try {
+      const userRef = doc(db, 'users', userId);
+      const userDoc = await getDoc(userRef);
 
-    if (userDoc.exists()) {
-      const updatedCart = userDoc.data().cart.filter(item => item.productId !== productId);
-      await setDoc(userRef, { cart: updatedCart }, { merge: true });
-      setCart(updatedCart);
-      toast.success("Producto eliminado del carrito.");
-      calculateSubtotal(updatedCart);
-    } else {
-      console.error("El documento del usuario no existe.");
+      if (userDoc.exists()) {
+        const updatedCart = userDoc.data().cart.filter(item => item.productId !== productId);
+        await setDoc(userRef, { cart: updatedCart }, { merge: true });
+        setCart(updatedCart);
+        toast.success("Producto eliminado del carrito.");
+        calculateSubtotal(updatedCart);
+      } else {
+        console.error("El documento del usuario no existe.");
+      }
+    } catch (error) {
+      console.error("Error removing item from cart: ", error);
     }
-  } catch (error) {
-    console.error("Error removing item from cart: ", error);
-  }
-};
+  };
 
   return (
     <Transition show={isOpen}>
@@ -111,27 +111,38 @@ const handleRemoveFromCart = async (productId) => {
                       <div className="mt-8">
                         <div className="flow-root">
                           <ul role="list" className="-my-6 divide-y divide-gray-200">
-                            {cart.map((item) => (
-                              <li key={item.productId} className="flex py-6">
-                                {/* Item details */}
-                                <div className="ml-4 flex flex-1 flex-col">
-                                  <div>
-                                    <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>{item.name}</h3>
-                                      <div className="flex items-center">
-                                        <p className="ml-4">{item.price}</p>
-                                        <button
-                                          className="ml-2 text-gray-400 hover:text-gray-500 focus:outline-none"
-                                          onClick={() => handleRemoveFromCart(item.productId)}
-                                        >
-                                          <XMarkIcon className="h-5 w-5" aria-hidden="true" />
-                                        </button>
+                            {userId ? (
+                              cart.map((item) => (
+                                <li key={item.productId} className="flex py-6">
+                                  {/* Item details */}
+                                  <div className="ml-4 flex flex-1 flex-col">
+                                    <div>
+                                      <div className="flex justify-between text-base font-medium text-gray-900">
+                                        <h3>{item.name}</h3>
+                                        <div className="flex items-center">
+                                          <p className="ml-4">{item.price}</p>
+                                          <button
+                                            className="ml-2 text-gray-400 hover:text-gray-500 focus:outline-none"
+                                            onClick={() => handleRemoveFromCart(item.productId)}
+                                          >
+                                            <XMarkIcon className="h-5 w-5" aria-hidden="true" />
+                                          </button>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </li>
-                            ))}
+                                </li>
+                              ))
+                            ) : (
+                              <>
+                                <li className="flex py-6">
+                                  <p className="ml-4 text-gray-500">Favor de iniciar sesión</p>
+                                </li>
+                                <Link to="/yo" onClick={onClose} className="ml-2 text-indigo-600 hover:text-indigo-500">
+                                  Ir a iniciar sesión
+                                </Link>
+                              </>
+                            )}
                           </ul>
                         </div>
                       </div>
@@ -145,16 +156,16 @@ const handleRemoveFromCart = async (productId) => {
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Carrito de compras</p>
                       <div className="mt-6">
-                        <a
+                        <button
                           href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 w-full"
+                          onClick={onClose}
                         >
                           Continuar
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                         <p>
-                          o{' '}
                           <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"

@@ -8,6 +8,7 @@ export default function Home(){
     useEffect(() => {
         SanityClient
             .fetch(`*[_type == "evento"]{
+                _id,
                 titulo,
                 imagen{
                     asset->{
@@ -29,11 +30,10 @@ export default function Home(){
                 <h1 className="text-5xl flex justify-center cursive">EL MAMÓN</h1>
                 <h2 className="text-lg text-gray-600 flex justify-center mb-12">Repostería Oaxaqueña</h2>
                 <div className="grid lg:grid-cols-2 gap-10">
-                    {homeData && homeData.map((home, index) => (
-                    <article>
+                    {homeData && homeData.map((home) => (
+                        <article key={home._id}>
                             <span 
-                                className="block h-64 relative rounded shadow leading-snug bg-white border-l-8"
-                                key={index}>
+                                className="block h-64 relative rounded shadow leading-snug bg-white border-l-8">
                                 <img
                                     style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}
                                     src={home.imagen.asset.url}
@@ -41,7 +41,7 @@ export default function Home(){
                                     className="w-auto h-auto rounded-r"
                                 />
                             </span>
-                    </article>
+                        </article>
                     ))}
                 </div>
             </section>

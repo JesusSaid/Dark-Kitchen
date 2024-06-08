@@ -101,7 +101,10 @@ const Perfil = () => {
                     )}
                 </div>
             ) : (
-                <button className={styles.loginButton} onClick={handleLogin}>Ingresar con Google</button>
+                <>
+                    <h1 className={styles.welcomeMessage}>Inicia sesión para ver tu perfil</h1>
+                    <button className={styles.loginButton} onClick={handleLogin}>Ingresar con Google</button>
+                </>
             )}
         </div>
     );

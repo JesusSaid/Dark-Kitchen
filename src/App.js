@@ -7,7 +7,7 @@ import PersonalizarPastel from "./components/PersonalizarPastel";
 import ProductDetails from "./components/ProductDetails";
 import Eventos from "./components/eventos";
 import VerPedidos from "./components/VerPedidos";
-import ProtectedRoute from './components/ProtectedRoute'; // Asegúrate de que la ruta sea correcta
+import ProtectedRoute from './components/ProtectedRoute';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

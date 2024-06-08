@@ -25,7 +25,7 @@ const ProtectedRoute = ({ element: Component, allowedTypes, ...rest }) => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>; // Puedes mostrar un spinner o algún indicador de carga aquí
+        return <div>Loading...</div>;
     }
 
     if (user && allowedTypes.includes(userType)) {

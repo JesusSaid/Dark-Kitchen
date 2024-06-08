@@ -30,6 +30,7 @@
     text-decoration: none;
     display: inline-flex;
     margin-left: 2rem;
+    cursor: pointer;
 }
 
 .navbarRightLinks {

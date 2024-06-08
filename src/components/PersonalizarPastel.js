@@ -1,7 +1,12 @@
 import React, {useState} from "react";
 import Style from "../styles/personalozarPastel.module.css"
+import { auth, db } from '../firebase';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
+import { v4 as uuidv4 } from 'uuid';
+import 'react-toastify/dist/ReactToastify.css';
 
-const PersonalizarPastel = () => {
+const PersonalizarPastel = ({ userId }) => {
     const [peopleOption, setPeopleOption] = useState("");
     const [charactersOption, setCharactersOption] = useState("");
     const [panFlavor, setPanFlavor] = useState("");
@@ -23,6 +28,57 @@ const PersonalizarPastel = () => {
             reader.readAsDataURL(selectedImage);
         }
     };
+
+    const addToCart = async () => {
+        const user = auth.currentUser;
+        if (!user) {
+            toast.info("Por favor, inicia sesión para añadir productos al carrito.");
+            return;
+        }
+    
+        try {
+            const userRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userRef);
+    
+            if (userDoc.exists()) {
+                const cart = userDoc.data().cart || [];
+    
+                // Calcular el precio del pastel personalizado
+                let price = 0;
+                if (peopleOption === "4-6") price += 400;
+                else if (peopleOption === "6-10") price += 1000;
+                else if (peopleOption === "10-20") price += 1180;
+    
+                if (charactersOption === "1") price += 250;
+                else if (charactersOption === "2") price += 500;
+                else if (charactersOption === "3") price += 750;
+    
+                // Agregar el nuevo pastel personalizado al carrito existente
+                cart.push({ 
+                    nombre: "Pastel Personalizado", 
+                    precio: price, 
+                    productId: uuidv4(),
+                    detalles: { 
+                        tamanio: peopleOption,
+                        personajes: charactersOption,
+                        saborPan: panFlavor,
+                        saborRelleno: fillingFlavor,
+                        imagen: imagePreview
+                    }
+                });
+
+                // Actualizar el documento del usuario con el nuevo carrito
+                await setDoc(userRef, { cart: cart }, { merge: true });
+                toast.success("Pastel personalizado añadido al carrito.");
+            } else {
+                console.error("El documento del usuario no existe.");
+                toast.error("Hubo un error al añadir el pastel personalizado al carrito.");
+            }
+        } catch (error) {
+            console.error("Error adding custom cake to cart: ", error);
+            toast.error("Hubo un error al añadir el pastel personalizado al carrito.");
+        }
+    };       
 
     return (
         <div className={Style.contenedorPrincipal}>
@@ -116,7 +172,7 @@ const PersonalizarPastel = () => {
                     </select>
                 </div>
 
-                <button className={Style.botonCarrito}>Agregar al carrito</button>
+                <button className={Style.botonCarrito} onClick={addToCart}>Agregar al carrito</button>
             </div>
         </div>
     )

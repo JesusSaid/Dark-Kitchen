@@ -145,12 +145,6 @@ svg {
 }
 
 
-.cartTitle {
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
 
 @media (max-width: 1024px) {
     .gridContainer {

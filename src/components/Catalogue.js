@@ -91,7 +91,7 @@ export default function Catalogue() {
     };           
 
     return (
-        <main>
+        <>
             <div className={Style.inputWrapper}>
                 <input
                     type="text"
@@ -130,6 +130,6 @@ export default function Catalogue() {
                 </div>
             ))}
             </div>
-        </main>
+        </>
     );
 }

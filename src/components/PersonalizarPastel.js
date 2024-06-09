@@ -102,7 +102,7 @@ const PersonalizarPastel = ({ userId }) => {
 };           
 
     return (
-        <main className={Style.contenedorPrincipal}>
+        <div className={Style.contenedorPrincipal}>
             <h1 className={Style.tituloPrincipal}>Personaliza tu Pastel</h1>
             <div className={Style.recuadroAviso}>
                 ¿Quieres tu pastel para este {formattedDate}? ¡Haz tu pedido HOY!
@@ -195,7 +195,7 @@ const PersonalizarPastel = ({ userId }) => {
 
                 <button className={Style.botonCarrito} onClick={addToCart}>Agregar al carrito</button>
             </div>
-        </main>
+        </div>
     )
 
 }

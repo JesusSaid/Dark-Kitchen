@@ -126,7 +126,7 @@ const Perfil = () => {
     };
 
     return (
-        <main className={styles.container}>
+        <div className={styles.container}>
             {user ? (
                 <div>
                     {userType === 1 ? (
@@ -177,7 +177,7 @@ const Perfil = () => {
                     <button className={styles.loginButton} onClick={handleLogin}>Ingresar con Google</button>
                 </>
             )}
-        </main>
+        </div>
     );
 };
 

@@ -56,7 +56,6 @@ export default function ProductDetails() {
                     <p className={Style.description}>{product.descripcion}</p>
                     <span className={Style.price}>${product.precio}</span>*/
     return (
-      <main >
         <div className={Style.app}>
           <div className={Style.details}>
             <div className={Style.bigImg}>
@@ -94,6 +93,5 @@ export default function ProductDetails() {
             </div>
           </div>
         </div>
-      </main>
     );
 }

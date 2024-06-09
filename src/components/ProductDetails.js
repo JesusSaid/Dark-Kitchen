@@ -13,7 +13,7 @@ const products = {
     { name: '30', inStock: true },
     { name: '50', inStock: true },
   ],
- }
+}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -23,7 +23,7 @@ export default function ProductDetails() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [selectedSize, setSelectedSize] = useState(products.sizes[2])
-   
+  
 
     useEffect(() => {
         SanityClient
@@ -67,7 +67,7 @@ export default function ProductDetails() {
                 <span>${product.precio}</span>
               </div>
             <div className={Style.box}>
-                  <p>Tamanio por cantidad de personas</p>
+                  <p>Tamaño por cantidad de personas</p>
             </div>
               <div className={Style.sizes}>
                         {products.sizes.map((size, index) => (

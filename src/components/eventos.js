@@ -11,7 +11,7 @@ const features = [
   
 const Eventos = () => {
     return (
-        <div className="bg-white">  
+        <main>  
         <div className="mx-auto grid max-w-2x2 grid-cols-1 items-center  gap-y-16 px-10 py-10 sm:px-4 sm:py-12 lg:max-w-7x3 lg:grid-cols-2 lg:px-10">
         
         <div>
@@ -53,7 +53,7 @@ const Eventos = () => {
           
         </div>
         
-      </div>
+      </main>
       
     )
 }

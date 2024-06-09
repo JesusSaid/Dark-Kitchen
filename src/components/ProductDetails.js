@@ -56,7 +56,8 @@ export default function ProductDetails() {
                     <p className={Style.description}>{product.descripcion}</p>
                     <span className={Style.price}>${product.precio}</span>*/
     return (
-      <div className={Style.app}>
+      <main >
+        <div className={Style.app}>
           <div className={Style.details}>
             <div className={Style.bigImg}>
               <img src={product.imagen.asset.url}  alt={product.imagen.alt || product.titulo}/>
@@ -92,6 +93,7 @@ export default function ProductDetails() {
               <button className={Style.cart}>Agregar al carrito</button>
             </div>
           </div>
-    </div>
+        </div>
+      </main>
     );
 }

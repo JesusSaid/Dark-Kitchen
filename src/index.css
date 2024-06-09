@@ -31,7 +31,7 @@
   padding: 0;
 }
 
-body{
+body,main{
   background-color: #FBFCFC;
   width: 100vw;
   height: 100vh;

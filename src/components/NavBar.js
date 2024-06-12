@@ -60,7 +60,7 @@ export default function NavBar() {
             <div className={Style.papelPicadoContainer}></div>
             <nav className={Style.navbarNav}>
                 <NavLink to='/' className={Style.navbarNavLink}>
-                    <Link to="/"><img src="./descarga.jpg" alt="Logo" className={Style.logoImg} onClick={closeMenu} /></Link>
+                    <Link to="/"><img src="./descarga.webp" alt="Logo" className={Style.logoImg} onClick={closeMenu} /></Link>
                 </NavLink>
                 <div className={Style.hamburgerMenu} onClick={toggleMenu}>
                     <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />

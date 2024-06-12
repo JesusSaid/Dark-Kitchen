@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SanityClient from "../client.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLongArrowAltRight } from "@fortawesome/free-solid-svg-icons";
 import Style from "../styles/catologo.module.css";
 
 export default function Catalogue() {
@@ -85,7 +87,7 @@ export default function Catalogue() {
                     <div className={Style.cardfooter}>
                         <span className={Style.texttitle}>${catalogue.precio}</span>
                         <div className={Style.cardbutton} >
-                            <Link to={`/producto/${catalogue._id}`}>Checar</Link>
+                            <Link to={`/producto/${catalogue._id}`}><FontAwesomeIcon icon={faLongArrowAltRight} /></Link>
                         </div>
                     </div>
                 </div>

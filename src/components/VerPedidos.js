@@ -62,7 +62,7 @@ export default function VerPedidos() {
                             <td>{pedido.contacto}</td>
                             <td>{pedido.direccion}</td>
                             <td>{pedido.tamanio}</td>
-                            <td>{pedido.tipo_pastel}</td>
+                            <td>{pedido.tipo_pastelz}</td>
                             <td>{pedido.fecha_entrega}</td>
                             <td>{pedido.recepcionista}</td>
                             <td>{pedido.observacion}</td>

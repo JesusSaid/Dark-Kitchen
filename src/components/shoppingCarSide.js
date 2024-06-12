@@ -52,7 +52,7 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
         const updatedCart = userDoc.data().cart.filter(item => item.productoId !== productoId);
         await setDoc(userRef, { cart: updatedCart }, { merge: true });
         setCart(updatedCart);
-        toast.success("Producto eliminado del carrito.");
+        toast.success("Producto eliminado del carrito");
         calculateSubtotal(updatedCart);
       } else {
         console.error("El documento del usuario no existe.");

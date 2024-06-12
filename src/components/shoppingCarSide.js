@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { auth, db } from '../firebase';
@@ -12,6 +12,7 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
   const [cart, setCart] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
   const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -62,13 +63,41 @@ const ShoppingCarSide = ({ isOpen, onClose, userId }) => {
     }
   };
 
-  const handleContinueClick = () => {
-    // Si el subtotal es mayor a 0, mostramos el modal "Comprando"
-    if (subtotal > 0) {
-      setShowModal(true);
-    } else {
-      // De lo contrario, simplemente cerramos el carrito
+  const handleContinueClick = async () => {
+    if (!userId) {
+      toast.error("No hay usuario autenticado.");
       onClose();
+      navigate("/yo");
+      return;
+    }
+
+    try {
+      const userRef = doc(db, 'users', userId);
+      const userDoc = await getDoc(userRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const { address, phone } = userData;
+
+        if (!address || !phone) {
+          toast.info("Favor de ingresar su dirección y teléfono.");
+          onClose();
+          navigate("/yo");
+          return;
+        }
+
+        // Si el subtotal es mayor a 0, mostramos el modal "Comprando"
+        if (subtotal > 0) {
+          setShowModal(true);
+        } else {
+          // De lo contrario, simplemente cerramos el carrito
+          onClose();
+        }
+      } else {
+        console.error("El documento del usuario no existe.");
+      }
+    } catch (error) {
+      console.error("Error al verificar los datos del usuario: ", error);
     }
   };
 

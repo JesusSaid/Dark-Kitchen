@@ -1,6 +1,58 @@
-import React from "react";
-import styles from "../styles/verPedidos.module.css"
-export default function VerPedidos(){
+import React, { useState, useEffect } from "react";
+import styles from "../styles/verPedidos.module.css";
+import { auth, db } from '../firebase';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+
+export default function VerPedidos() {
+    const [pedidos, setPedidos] = useState([]);
+
+    useEffect(() => {
+        const fetchPedidos = async () => {
+            const user = auth.currentUser;
+            if (user) {
+                try {
+                    const userRef = doc(db, 'users', user.uid);
+                    const userDoc = await getDoc(userRef);
+                    if (userDoc.exists()) {
+                        const userData = userDoc.data();
+                        console.log("User Data: ", userData);
+                        if (userData.pedido) {
+                            setPedidos(userData.pedido);
+                        } else {
+                            console.error("No se encontraron pedidos para este usuario.");
+                        }
+                    } else {
+                        console.error("El documento del usuario no existe.");
+                    }
+                } catch (error) {
+                    console.error("Error al obtener los pedidos: ", error);
+                }
+            } else {
+                console.error("No hay usuario autenticado.");
+            }
+        };
+
+        fetchPedidos();
+    }, []);
+
+    const handleEstadoChange = async (index, newEstado) => {
+        const updatedPedidos = [...pedidos];
+        updatedPedidos[index].estado = newEstado;
+        setPedidos(updatedPedidos);
+
+        const user = auth.currentUser;
+        if (user) {
+            try {
+                const userRef = doc(db, 'users', user.uid);
+                await updateDoc(userRef, {
+                    pedido: updatedPedidos
+                });
+            } catch (error) {
+                console.error("Error al actualizar el estado del pedido: ", error);
+            }
+        }
+    };
+
     return (
         <div className={styles.VerPedidos}>
             <table>
@@ -21,59 +73,30 @@ export default function VerPedidos(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>23/05/2024</td>
-                        <td>Juan Carlos García</td>
-                        <td>9500000000</td>
-                        <td>Salón de fiesta 1</td>
-                        <td>Pequeño</td>
-                        <td>Imagen de tal personaje</td>
-                        <td>04/06/2024 17:00</td>
-                        <td>Juan Carlos García</td>
-                        <td>Ninguna</td>
-                        <td>$$$$</td>
-                        <td>Aceptado</td>
-
-                    </tr>
-                    <tr>
-                    <td>23/05/2024</td>
-                        <td>Juan Carlos García</td>
-                        <td>9500000000</td>
-                        <td>Salón de fiesta 1</td>
-                        <td>Pequeño</td>
-                        <td>Imagen de tal personaje</td>
-                        <td>04/06/2024 17:00</td>
-                        <td>Juan Carlos García</td>
-                        <td>Ninguna</td>
-                        <td>$$$$</td>
-                        <td>Aceptado</td>
-                    </tr>
-                    <tr>
-                    <td>23/05/2024</td>
-                        <td>Juan Carlos García</td>
-                        <td>9500000000</td>
-                        <td>Salón de fiesta 1</td>
-                        <td>Pequeño</td>
-                        <td>Imagen de tal personaje</td>
-                        <td>04/06/2024 17:00</td>
-                        <td>Juan Carlos García</td>
-                        <td>Ninguna</td>
-                        <td>$$$$</td>
-                        <td>Aceptado</td>
-                    </tr>
-                    <tr>
-                    <td>23/05/2024</td>
-                        <td>Juan Carlos García</td>
-                        <td>9500000000</td>
-                        <td>Salón de fiesta 1</td>
-                        <td>Pequeño</td>
-                        <td>Imagen de tal personaje</td>
-                        <td>04/06/2024 17:00</td>
-                        <td>Juan Carlos García</td>
-                        <td>Ninguna</td>
-                        <td>$$$$</td>
-                        <td>Aceptado</td>
-                    </tr>
+                    {pedidos.map((pedido, index) => (
+                        <tr key={index}>
+                            <td>{pedido.fecha}</td>
+                            <td>{pedido.cliente}</td>
+                            <td>{pedido.contacto}</td>
+                            <td>{pedido.direccion}</td>
+                            <td>{pedido.tamanio}</td>
+                            <td>{pedido.tipo_pastel}</td>
+                            <td>{pedido.fecha_entrega}</td>
+                            <td>{pedido.recepcionista}</td>
+                            <td>{pedido.observacion}</td>
+                            <td>{pedido.precio}</td>
+                            <td>
+                                <select
+                                    value={pedido.estado}
+                                    onChange={(e) => handleEstadoChange(index, e.target.value)}
+                                >
+                                    <option value="En espera">En espera</option>
+                                    <option value="Aceptado">Aceptado</option>
+                                    <option value="Rechazado">Rechazado</option>
+                                </select>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

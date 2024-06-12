@@ -113,7 +113,7 @@ const PersonalizarPastel = ({ userId }) => {
                 <p>Solo llena este formato con los detalles de tu pastel. Puedes subir fotos y todos los detalles del modelo que quieres:</p>
             </div>
             <div className={Style.contenedorImg}>
-                <img src="./Pasteles_Personalizados.jpg" alt="Cake" className={Style.imagen} />
+                <img src="./Pasteles_Personalizados.webp" alt="Cake" className={Style.imagen} />
             </div>
             <div className={Style.contenedorSecundario}>
                 <div className={Style.seccion}>

@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SanityClient from "../client.js";
 import Style from "../styles/catologo.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { auth, db } from '../firebase';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export default function Catalogue() {
     const [catalogueData, setCatalogueData] = useState(null);
@@ -55,40 +49,7 @@ export default function Catalogue() {
     const handleSearchChange = (event) => {
         const text = event.target.value;
         setSearchText(text);
-    };
-
-    const addToCart = async (productId, productName, productPrice, productImage) => {
-        const user = auth.currentUser;
-        if (!user) {
-            toast.info("Por favor, inicia sesión para añadir productos al carrito.");
-            return;
-        }
-    
-        try {
-            const userRef = doc(db, 'users', user.uid);
-            const userDoc = await getDoc(userRef);
-    
-            if (userDoc.exists()) {
-                const cart = userDoc.data().cart || [];
-                // Agregar el nuevo producto al carrito existente
-                cart.push({ 
-                    productoId: productId, 
-                    nombre: productName, 
-                    precio: productPrice,
-                    imagen: productImage // Agregar la URL de la imagen al carrito
-                });
-                // Actualizar el documento del usuario con el nuevo carrito
-                await setDoc(userRef, { cart: cart }, { merge: true });
-                toast.success("Producto añadido al carrito.");
-            } else {
-                console.error("El documento del usuario no existe.");
-                toast.error("Hubo un error al añadir el producto al carrito.");
-            }
-        } catch (error) {
-            console.error("Error adding to cart: ", error);
-            toast.error("Hubo un error al añadir el producto al carrito");
-        }
-    };           
+    };        
 
     return (
         <>
@@ -123,8 +84,8 @@ export default function Catalogue() {
                     </Link>
                     <div className={Style.cardfooter}>
                         <span className={Style.texttitle}>${catalogue.precio}</span>
-                        <div className={Style.cardbutton} onClick={() => addToCart(catalogue._id, catalogue.titulo, catalogue.precio, catalogue.imagen.asset.url)}>
-                            <FontAwesomeIcon icon={faShoppingCart} />
+                        <div className={Style.cardbutton} >
+                            <Link to={`/producto/${catalogue._id}`}>Checar</Link>
                         </div>
                     </div>
                 </div>

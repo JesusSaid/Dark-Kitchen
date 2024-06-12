@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "../styles/verPedidos.module.css";
 import { auth, db } from '../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 export default function VerPedidos() {
     const [pedidos, setPedidos] = useState([]);
@@ -35,6 +35,24 @@ export default function VerPedidos() {
         fetchPedidos();
     }, []);
 
+    const handleEstadoChange = async (index, newEstado) => {
+        const updatedPedidos = [...pedidos];
+        updatedPedidos[index].estado = newEstado;
+        setPedidos(updatedPedidos);
+
+        const user = auth.currentUser;
+        if (user) {
+            try {
+                const userRef = doc(db, 'users', user.uid);
+                await updateDoc(userRef, {
+                    pedido: updatedPedidos
+                });
+            } catch (error) {
+                console.error("Error al actualizar el estado del pedido: ", error);
+            }
+        }
+    };
+
     return (
         <div className={styles.VerPedidos}>
             <table>
@@ -62,12 +80,21 @@ export default function VerPedidos() {
                             <td>{pedido.contacto}</td>
                             <td>{pedido.direccion}</td>
                             <td>{pedido.tamanio}</td>
-                            <td>{pedido.tipo_pastelz}</td>
+                            <td>{pedido.tipo_pastel}</td>
                             <td>{pedido.fecha_entrega}</td>
                             <td>{pedido.recepcionista}</td>
                             <td>{pedido.observacion}</td>
                             <td>{pedido.precio}</td>
-                            <td>{pedido.estado}</td>
+                            <td>
+                                <select
+                                    value={pedido.estado}
+                                    onChange={(e) => handleEstadoChange(index, e.target.value)}
+                                >
+                                    <option value="En espera">En espera</option>
+                                    <option value="Aceptado">Aceptado</option>
+                                    <option value="Rechazado">Rechazado</option>
+                                </select>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
